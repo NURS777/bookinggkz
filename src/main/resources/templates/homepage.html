@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+      layout:decorate="~{layout/main.html}">
+<div layout:fragment="siteContent">
+    <div class="container-fluid-lg ps-5 pb-5 pt-2" style="background-color: #6B89F3;" >
+         <div th:insert="~{centerlinks.html}"></div>
+    </div>
+    <div class="container-fluid">
+        <div class="row" style="background-color:#6B89F3">
+            <div class="col-xl-7 " >
+                <img th:src="@{'/css/image 12.png'}" style="width:80%">
+            </div>
+            <div class="col-xl-5 mt-5 center2 mx-auto">
+                <div class="container">
+                    <div class="row" style="margin-top:20%">
+                        <div class="col-12 mx-auto">
+                            <div class="text">
+                                Online Booking system for <br><b>Events in KZ</b>
+                            </div>
+                            <div class="text mt-5 welcome">
+                                <div class="ms-5">
+                                    Welcome,
+                                </div>
+                               <h1 class="welcome" th:text="${CURRENT_USER.getFullname()}">!</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="padding-top: 100px;padding-right: 150px;">
+                        <div class="col-lg-6 mx-auto">
+                            <a th:href="@{'/booking'}">
+                            <button  type="submit" class="btn-info">
+                                Book Now!
+                            </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

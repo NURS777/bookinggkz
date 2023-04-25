@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layout/main.html}">
+<div layout:fragment="siteContent">
+    <div class="container" style="border: 1px solid black;border-radius: 5px;margin-bottom: 10%">
+      <div class="row">
+          <div class="col-lg-4 p-lg-2 pb-lg-4" style="background-color: #257CFF;">
+              <p class="my-3 text-center welcome" style="font-size: 30px" th:text="${CURRENT_USER.getFullname()}"></p>
+              <div class="ps-lg-5" style="color: whitesmoke">
+                  <div class="mb-3 ms-lg-5">
+                      <b>Email: </b><span th:text="${CURRENT_USER.getEmail()}"></span>
+                  </div>
+                  <div class="mb-3 ms-lg-5">
+                      <b>Phone number: </b><span th:text="${CURRENT_USER.getPhonenumber()}"></span>
+                  </div>
+                  <div class="mb-3 ms-lg-5">
+                      <b>City: </b><span th:text="${CURRENT_USER.getCity()}"></span>
+                  </div>
+                  <div class="mb-3 ms-lg-5">
+                      <b>Birthday: </b><span th:text="${CURRENT_USER.getBirthdate()}"></span>
+                  </div>
+              </div>
+          </div>
+        <div class="col-8 mx-auto p-5" style="background-color: #ededed;">
+            <div class="alert alert-success alert-dismissible fade show mx-auto" role="alert" th:if = "${param.passwordsuccess  !=null}">
+                Successfully password updated!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <div class="alert alert-danger alert-dismissible fade show mx-auto" role="alert" th:if = "${param.oldpasserror  !=null}">
+                Incorrect old password!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <div class="alert alert-danger alert-dismissible fade show mx-auto" role="alert" th:if = "${param.passworderror  !=null}">
+                New passwords are not same!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <form  th:action="@{/toupdatepassword}" method="post">
+                <div class="mb-2 mx-auto inputs">
+                    <input required name="user_oldpass" type="Password" class="form-control" placeholder="OLD PASSWORD">
+                </div>
+                <div class="mb-2 mx-auto inputs">
+                    <input required name="user_newpass" type="Password" class="form-control" placeholder="NEW PASSWORD">
+                </div>
+                <div class="mb-2 mx-auto inputs">
+                    <input required name="user_renewpass" type="Password" class="form-control" placeholder="RETYPE NEW PASSWORD">
+                </div>
+                <div class="col-md-12 text-center mx-auto" style="width: 50%;">
+                    <button class="submitAcc">UPDATE PASSWORD</button>
+                </div>
+            </form>
+        </div>
+      </div>
+    </div>
+</div>
+</html>

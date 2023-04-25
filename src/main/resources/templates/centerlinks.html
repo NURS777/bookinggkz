@@ -1,0 +1,36 @@
+
+  <div class="row">
+    <div class="col-lg-1 links">
+      <div class="btn-group dropdown ">
+        <button type="button" class="btn "data-bs-toggle="dropdown">
+          City<ion-icon name="chevron-down-outline" ></ion-icon>
+        </button>
+        <ul class="dropdown-menu" style="height: 150px;overflow: auto">
+          <li><a class="dropdown-item" th:href="@{'/bookbycity/' + ${city.getId()} + '-page.html'}" th:each="city:${cities}" th:text="${city.getName()}"></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-lg-1 links">
+      <div class="btn-group dropdown">
+        <button type="button" class="btn"data-bs-toggle="dropdown">
+          Events<ion-icon name="chevron-down-outline"></ion-icon>
+        </button>
+        <ul class="dropdown-menu" >
+          <li><a class="dropdown-item" th:href="@{'/booking/' + ${top.getId()} + '-page.html'}" th:each="top:${topics}" th:text="${top.getName()}"></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-lg-1 links">
+      <div class="btn-group dropdown">
+        <button type="button" class="btn "data-bs-toggle="dropdown">
+          Resources<ion-icon name="chevron-down-outline"></ion-icon>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#">How it works?</a></li>
+          <li><a class="dropdown-item" href="#">Contact us</a></li>
+          <li><a class="dropdown-item" href="#">Help center</a></li>
+          <li><a class="dropdown-item" href="#">Leave feedback</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>

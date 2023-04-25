@@ -1,0 +1,38 @@
+.linkList{
+    background-color: #257CFF;
+}
+
+.linkList a{
+    background-color: #257CFF;
+    color: white;border:0px ;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.userS{
+    background-color: white;
+    margin-top: 6%;
+    border-radius:30px;
+}
+
+.userS:hover{
+    background-color: lightblue;
+    color: #6c757d;
+}
+
+.titles{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 42px;
+
+    color: #000000;
+}
+
+.statistica{
+    height: 7rem;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+}

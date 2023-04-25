@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<link rel="stylesheet" type="text/css" th:href="@{'/css/mainpage.css'}">
+<div class="container" xmlns:th="http://www.thymeleaf.org"
+     xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <a sec:authorize="isAnonymous()" th:href="@{'/'}"> <img src="/css/Rectangle 2.png" style="width: 80%;"></a>
+                <a sec:authorize="isAuthenticated()" th:href="@{'/homepage'}"> <img src="/css/Rectangle 2.png" style="width: 80%;"></a>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0" sec:authorize="isAuthenticated()">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            EN
+                            <img src="/css/image 3.png">
+                        </a>
+                    </li>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary userS" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="border: 1px solid black;color: black;">
+                            <ion-icon name="person-outline"></ion-icon>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item"th:href="@{'/profile'}">Profile</a></li>
+                            <li><a class="dropdown-item"th:href="@{'/myorders'}">My orders</a></li>
+                            <li><a class="dropdown-item" th:href="@{'/adminpage'}"
+                            sec:authorize="hasAnyRole('ROLE_ADMIN')">Admin page</a></li>
+                            <li><a class="dropdown-item" th:href="@{'/adminpage'}"
+                                   sec:authorize="hasAnyRole('ROLE_MODERATOR')">Study</a></li>
+                            <li><a class="dropdown-item" href="JavaScript:void (0)" onclick="logout()">Logout</a></li>
+                        </ul>
+                        <script type="text/javascript">
+                            function logout(){
+                                document.getElementById("logoutFormId").submit();
+                            }
+                        </script>
+                        <form th:action="@{'/tologout'}" method="post" id="logoutFormId">
+
+                        </form>
+                    </div>
+                </ul>
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0" sec:authorize="isAnonymous()">
+                    <li class="nav-item">
+                        <a class="nav-link log_In" href="#">Log In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link sign_Up" href="#">Sign Up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            EN
+                            <img src="/css/image 3.png">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+

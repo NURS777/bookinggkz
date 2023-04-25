@@ -1,0 +1,17 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:insert="~{head.html}">
+    </head>
+    <body>
+        <div class="main">
+            <div th:insert="~{navbar.html}"></div>
+            <div layout:fragment="siteContent">
+
+            </div>
+            <div style="position:static">
+                <div th:insert="~{bottom.html}"></div>
+            </div>
+        </div>
+    </body>
+</html>

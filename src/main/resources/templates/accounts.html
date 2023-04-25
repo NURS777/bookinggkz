@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layout/mainfluid.html}">
+<div layout:fragment="siteContent">
+  <div class="container" style="border-radius: 5px;border: 1px solid #ededed;">
+    <div class="row" style="height: 50%">
+      <div class="col-lg-4 linkList">
+        <div th:insert="~{adminlinks.html}"></div>
+      </div>
+      <div class="col-lg-8" style="background-color: #ededed;">
+        <div class="ms-1 mt-3 titles">
+          Accounts
+        </div>
+          <div style="position: relative;
+height: 360px;
+overflow: auto;
+display: block">
+            <table class="table table-striped mt-1" sec:authorize="hasAnyRole('ROLE_ADMIN')" style="background: #FFFFFF;border: 1px solid #9D9D9D;box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);border-radius: 5px">
+              <thead>
+              <th>ID</th>
+              <th>Fullname</th>
+              <th>Birthdate</th>
+              <th>Phonenumber</th>
+              </thead>
+              <tbody>
+              <tr th:each="us:${users}">
+                <td th:text="${us.getId()}"></td>
+                <td th:text="${us.getFullname()}"></td>
+                <td th:text="${us.getBirthdate()}"></td>
+                <td th:text="${us.getPhonenumber()}"></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="/js/second.js"></script>
+</html>

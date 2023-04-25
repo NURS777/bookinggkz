@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+      layout:decorate="~{layout/mainfluid.html}">
+<div layout:fragment="siteContent">
+  <div class="container" style="border-radius: 5px;border: 1px solid #ededed;">
+    <div class="row">
+      <div class="col-lg-4 linkList">
+        <div th:insert="~{adminlinks.html}"></div>
+      </div>
+      <div class="col-lg-8 p-3" style="background-color: #ededed;">
+        <div class="mb-3 ms-4 titles">
+          Dashboard
+        </div>
+        <div class="container mb-lg-3">
+          <div class="row">
+            <div class="col-lg-3">
+              <div class="ms-3 mb-3 text-center statistica" style="background-color: #7492FF">
+                <b th:text="${books.size()}"></b> orders
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="ms-3 mb-3 text-center statistica" style="background-color: #66EDFF">
+                <b th:text="${users.size()}"></b> activ accounts
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="ms-3 mb-3 text-center statistica" style="background-color: #FF8383">
+                <b th:text="${orgs.size()}"></b> partners
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="ms-3 mb-3 text-center statistica" style="background-color: #D9C16B">
+                <b>68</b> employeers
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</html>

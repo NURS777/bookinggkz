@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+      layout:decorate="~{layout/mainP.html}">
+<div layout:fragment="siteContent">
+    <div class="container-fluid-lg ps-5 pb-5 pt-2" style="background-color: #6B89F3;" >
+        <div th:insert="~{centerlinks.html}"></div>
+    </div>
+    <div class="container-fluid">
+        <div class="row" style="background-color:#6B89F3">
+            <div class="col-xl-7  pt-5" >
+                <img th:src="@{'/css/event-planning-5631299-4693328 1.png'}" style="width:100%">
+            </div>
+            <div class="col-xl-5 pt-5 center2 mx-auto">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="text">
+                                Online Booking system for <br><b>Events in KZ</b>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row pt-5">
+                        <div class="col-lg-4">
+                            <div>
+                                <button  class="buttongetAcc getAcc">Get an Account
+                                    <ion-icon name="person-outline"></ion-icon></button>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <button  class="buttongetAcc">Request a call
+                                    <ion-icon name="call-outline"></ion-icon></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="padding-top: 170px;">
+                        <div class="col-lg-6 mx-auto">
+                            <a th:href="@{'/booking'}">
+                                <button type="button" class="btn-info getBook">
+                                    Book Now!
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

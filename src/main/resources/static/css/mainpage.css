@@ -1,0 +1,212 @@
+body{
+	margin: 0px;
+	padding: 0;
+}
+
+.nav-link{
+	font-family: 'Inter';
+	font-style: normal;
+	font-weight: 1000;
+	margin-left: 70px;
+	color: #000000;
+}
+.links{
+	margin-left: 50px;
+}
+.btn{
+	border:0px;
+	font-family: 'Inter';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 20px;
+	line-height: 24px;
+	color: white;
+	text-align: center;
+	display: flex;
+	align-items: center;
+}
+.dropdown-item:active{
+	background:grey;
+}
+
+.text{
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 35px;
+	line-height: 41px;
+	color: #FFFFFF;
+}
+
+.buttongetAcc{
+	width: 100%;
+	height: 45px;
+	background-color: #FFFFFF;
+	box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 20px;
+	color: #000000;
+	font-family: 'Roboto';
+	text-align: center;
+	font-style: normal;
+	font-weight: 300;
+	font-size: 16px;
+	line-height: 19px;
+	border: 0px;
+}
+
+.buttongetAcc:hover{
+	background-color: #a3c3d1;
+}
+
+.btn-info{
+	width: 100%;
+	height: 50px;
+	background: #00E0FF;
+	box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 20px;
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 900;
+	font-size: 20px;
+	line-height: 23px;
+	color: #FFFFFF;
+	border: 0px;
+}
+.btn-info:hover{
+	background-color: #a3c3d1;
+}
+
+.container.registr{
+	visibility: hidden;
+	overflow: hidden;
+}
+.button-box{
+	width: 85%;
+	margin:35px auto;
+	position: relative;
+	border: 3px solid #C9C9C9;
+	border-top: 0px;border-left: 0px;border-right: 0px;
+}
+
+.toggle-btn{
+	padding: 2% 15%;
+	background: transparent;
+	border:0;
+	outline:none;
+	font-family: 'Inter';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 20px;
+	line-height: 24px;
+	color: #000000;
+}
+
+#btn{
+	top:3px;
+	left:3px;
+	position: relative;
+	width: 50%;
+	height: 100%;
+	border: 3px solid #000000;
+	transition: .5s ease;
+	border-top: 0px;border-left: 0px;border-right: 0px;
+}
+
+.inputs{
+	width: 80%;
+}
+
+.welcome{
+	font-family: 'Cookie', serif;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 60px;
+	line-height: 79px;
+	color: #FFFFFF;
+}
+
+.btn-primary{
+	width: 45%;
+	height: 50px;
+	background: #00E0FF;
+	box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 10px;
+	text-align: center;
+
+}
+
+#login{
+	bottom: 1000px;
+}
+
+#forgot{
+	bottom: 1000px;
+}
+
+#forgotOtp{
+	bottom: 1000px;
+}
+
+#changePass{
+	bottom: 1000px;
+}
+
+#goodchange{
+	bottom: 1000px;
+}
+
+.toble{
+	width: 100%;
+}
+.toble a{
+	color: #444444;
+	text-decoration: none;
+}
+.toble a:hover{
+	color: #a3c3d1;
+}
+.toble th {
+	text-align: justify;
+	padding-bottom: 10px;
+	padding-left: 40px;
+	width: 34px;
+	height: 19px;
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 600;
+	font-size: 80%;
+	line-height: 19px;
+}
+.toble td {
+	padding-left: 40px;
+	width: 1%;
+	height: 16px;
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 80%;
+	line-height: 16px;
+}
+
+.submitAcc{
+	width: 67%;
+	height: 50px;
+	background: #00E0FF;
+	box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 10px;
+	text-align: center;
+	font-family: 'Inter';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 100%;
+	border:0px;
+}
+
+input[type='number'] {
+	-moz-appearance:textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+      layout:decorate="~{layout/mainfluid.html}">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap 5 image Upload with Preview</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<div layout:fragment="siteContent">
+  <div class="container" style="border-radius: 5px;border: 1px solid #ededed;">
+    <div class="row">
+      <div class="col-lg-4 linkList">
+        <div th:insert="~{adminlinks.html}"></div>
+      </div>
+      <div class="col-lg-6 text-center" style="background-color: #ededed;">
+        <div class="mx-auto mb-3 titles ">
+          Topics
+        </div>
+        <form th:action="@{/addtopic}" method="post" enctype="multipart/form-data">
+          <div class="mb-3 mx-auto inputs">
+            <input required name="topic_name" placeholder="Topic name" type="text" class="form-control">
+          </div>
+          <div class="mb-3 mx-auto form-group" style="width: 80%">
+            <textarea required name="topic_descr" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Topic description"></textarea>
+          </div>
+
+          <div class="container col-md-6" >
+            <div class="mb-5">
+              <label class="form-label">Select image</label>
+              <input class="form-control" type="file" id="formFile" onchange="preview()" name="topic_ava">
+            </div>
+            <img id="frame" src="" class="img-fluid" />
+          </div>
+
+          <script>
+            function preview() {
+              frame.src = URL.createObjectURL(event.target.files[0]);
+            }
+            function clearImage() {
+              document.getElementById('formFile').value = null;
+              frame.src = "";
+            }
+          </script>
+          <div class="col-md-12 text-center mt-3" style="border: 1px solid #FFFFFF;">
+            <button class="submitAcc">Add topic</button>
+          </div>
+        </form>
+      </div>
+      <div class="col-lg-2 pt-2" >
+        <table class="table table-striped" style="background: #FFFFFF;border: 1px solid #9D9D9D;box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);border-radius: 5px;">
+          <thead>
+          <th>ID</th>
+          <th>TOPIC NAME</th>
+          </thead>
+          <tbody>
+          <tr th:each="top:${topics}">
+            <td th:text="${top.getId()}"></td>
+            <td th:text="${top.getName()}"></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layout/mainfluid.html}">
+<div layout:fragment="siteContent">
+  <div class="container" style="border-radius: 5px;border: 1px solid #ededed;">
+    <div class="row" style="height: 40%">
+      <div class="col-lg-3 linkList">
+        <div th:insert="~{adminlinks.html}"></div>
+      </div>
+      <div class="col-lg-9 p-3" style="background-color: #ededed;">
+        <div class="ms-2 mb-3 titles">
+          Announcement managment
+        </div>
+        <form th:action="@{/addevent}" method="post" enctype="multipart/form-data">
+          <div class="row mb-3">
+            <div class="col-lg-4">
+              <select class="form-select mb-3" name="orgs_id" sec:authorize="hasAnyRole('ROLE_ADMIN')">
+                <option th:each="organ : ${orgs}" th:if="${organ.getId()!=5}" th:text="${organ.getName()}" th:value="${organ.getId()}"></option>
+              </select>
+              <select class="form-select mb-3" name="orgs_id" sec:authorize="hasAnyRole('ROLE_MODERATOR')">
+                <option th:text="${org.name}" th:value="${org.getId()}"></option>
+              </select>
+            </div>
+
+            <div class="col-lg-4">
+              <input required name="event_partnernum" placeholder="Partner number" type="number" class="form-control">
+            </div>
+            <div class="col-lg-4">
+              <input  required name="event_date"
+                    placeholder="Date"
+                    class="form-control"
+                    type="text"
+                    onfocus="(this.type='date')"
+                      id="date" />
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-lg-4">
+              <input required name="event_address" placeholder="Address" type="text" class="form-control">
+            </div>
+            <div class="col-lg-4">
+              <input required name="event_price" type="text" class="form-control" placeholder="Price">
+            </div>
+
+            <div class="col-lg-4">
+              <select required name="city_id" class="form-select mx-auto" aria-label="Default select example" style="width:80% ;">
+                <option th:each="city:${cities}" th:text="${city.name}" th:value="${city.getId()}"></option>
+              </select>
+            </div>
+
+          </div>
+          <div class="row mb-3">
+            <div class="col-lg-4">
+              <div class="mb-4">
+                <input required name="event_name" type="text" class="form-control" placeholder="Name">
+              </div>
+              <div class="mb-3">
+                <input required name="event_title" type="text" class="form-control" placeholder="Title">
+              </div>
+            </div>
+            <div class="col-lg-8">
+              <textarea required name="event_descr" class="form-control" id="exampleFormControlTextarea1" rows="4" placeholder="Description"></textarea>
+            </div>
+          </div>
+
+          <b><h5><p class="text-center">Choose topics:</p></h5></b>
+          <div class="mb-4 col-12 d-flex flex-wrap">
+            <div class="ms-3" th:each="top : ${topics}">
+              <input type="checkbox" name="top_id" th:value="${top.getId()}">
+              <label th:text="${top.getName()}"></label>
+            </div>
+          </div>
+          <div class="container col-md-12" style="width: 80%">
+            <div class="mb-5 text-center">
+              <label class="form-label">Select image</label>
+              <input class="form-control" type="file" id="formFile" onchange="preview()" required name="event_ava">
+            </div>
+            <img id="frame" src="" class="img-fluid" />
+          </div>
+          <script>
+            function preview() {
+              frame.src = URL.createObjectURL(event.target.files[0]);
+            }
+            function clearImage() {
+              document.getElementById('formFile').value = null;
+              frame.src = "";
+            }
+          </script>
+          <div class="col-md-12 text-center mt-3">
+            <button class="submitAcc">Add event</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</html>
