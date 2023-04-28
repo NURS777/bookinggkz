@@ -1,38 +1,112 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       layout:decorate="~{layout/main.html}">
 <div layout:fragment="siteContent">
-    <div class="container-fluid-lg ps-5 pb-5 pt-2" style="background-color: #6B89F3;" >
-         <div th:insert="~{centerlinks.html}"></div>
-    </div>
-    <div class="container-fluid">
-        <div class="row" style="background-color:#6B89F3">
-            <div class="col-xl-7 " >
-                <img th:src="@{'/css/image 12.png'}" style="width:80%">
-            </div>
-            <div class="col-xl-5 mt-5 center2 mx-auto">
-                <div class="container">
-                    <div class="row" style="margin-top:20%">
-                        <div class="col-12 mx-auto">
-                            <div class="text">
-                                Online Booking system for <br><b>Events in KZ</b>
-                            </div>
-                            <div class="text mt-5 welcome">
-                                <div class="ms-5">
-                                    Welcome,
+    <div sec:authorize="hasAnyRole('ROLE_USER')">
+        <div class="container-fluid-lg ps-5 pb-5 pt-2" style="background-color: #6B89F3;" >
+            <div th:insert="~{centerlinks.html}"></div>
+        </div>
+        <div class="container-fluid">
+            <div class="row" style="background-color:#6B89F3">
+                <div class="col-xl-7 " >
+                    <img th:src="@{'/css/image 12.png'}" style="width:80%">
+                </div>
+                <div class="col-xl-5 mt-5 center2 mx-auto">
+                    <div class="container">
+                        <div class="row" style="margin-top:20%">
+                            <div class="col-12 mx-auto">
+                                <div class="text">
+                                    Online Booking system for <br><b>Events in KZ</b>
                                 </div>
-                               <h1 class="welcome" th:text="${CURRENT_USER.getFullname()}">!</h1>
+                                <div class="text mt-5 welcome">
+                                    <div class="ms-5">
+                                        Welcome,
+                                    </div>
+                                    <h1 class="welcome" th:text="${CURRENT_USER.getFullname()}">!</h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="padding-top: 100px;padding-right: 150px;">
+                            <div class="col-lg-6 mx-auto">
+                                <a th:href="@{'/booking'}">
+                                    <button  type="submit" class="btn-info">
+                                        Book Now!
+                                    </button>
+                                </a>
                             </div>
                         </div>
                     </div>
-                    <div class="row" style="padding-top: 100px;padding-right: 150px;">
-                        <div class="col-lg-6 mx-auto">
-                            <a th:href="@{'/booking'}">
-                            <button  type="submit" class="btn-info">
-                                Book Now!
-                            </button>
-                            </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div sec:authorize="hasAnyRole('ROLE_ADMIN')">
+        <div class="container" style="border-radius: 5px;border: 1px solid #ededed;">
+            <div class="row">
+                <div class="col-lg-4 linkList">
+                    <div th:insert="~{adminlinks.html}"></div>
+                </div>
+                <div class="col-lg-8 p-3" style="background-color: #ededed;">
+                    <div class="mb-3 ms-4 titles">
+                        Dashboard
+                    </div>
+                    <div class="container mb-lg-3">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="ms-3 mb-3 text-center statistica" style="background-color: #7492FF">
+                                    <b th:text="${books.size()}"></b> orders
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="ms-3 mb-3 text-center statistica" style="background-color: #66EDFF">
+                                    <b th:text="${users.size()}"></b> activ accounts
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="ms-3 mb-3 text-center statistica" style="background-color: #FF8383">
+                                    <b th:text="${orgs.size()}"></b> partners
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div sec:authorize="hasAnyRole('ROLE_MODERATOR')">
+        <div class="container" style="border-radius: 5px;border: 1px solid #ededed;">
+            <div class="row">
+                <div class="col-lg-4 linkList">
+                    <div th:insert="~{adminlinks.html}"></div>
+                </div>
+                <div class="col-lg-8 p-3" style="background-color: #ededed;">
+                    <div class="mb-3 titles">
+                        Orders
+                    </div>
+                    <div class="mb-3">
+                        <div style="position: relative;height: 400px;overflow: auto;display: block">
+                            <table class="table table-striped mt-3" style="background: #FFFFFF;border: 1px solid #9D9D9D;box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);border-radius: 5px">
+                                <thead>
+                                <th>Order number</th>
+                                <th>Name of event</th>
+                                <th>Date</th>
+                                <th>Phone number of client</th>
+                                <th>Number of tickets</th>
+                                </thead>
+                                <tbody>
+                                <tr th:each="b:${books}">
+                                    <td th:text="${b.getId()}"></td>
+                                    <td th:text="${b.getEvents().getName()}"></td>
+                                    <td th:text="${b.getEvents().getDate()}"></td>
+                                    <td th:text="${b.getPhoneforbook()}"></td>
+                                    <td th:text="${b.getNumberoftickets()}"></td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

@@ -83,19 +83,6 @@ public class HomeController {
     }
 
 
-    @GetMapping("/dashboard")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MODERATOR')")
-    public String dashboard(Model model){
-        model.addAttribute("CURRENT_USER",getUser());
-        List<Users> users = userService.getAllUsers();
-        model.addAttribute("users",users);
-        List<Booking> bookings = databaseBean.getAllBooks();
-        model.addAttribute("books",bookings);
-        List<Organizations> organizations = databaseBean.getAllOrganizations();
-        model.addAttribute("orgs",organizations);
-        return "dashboard";
-    }
-
     @PostMapping("/addevent")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MODERATOR')")
     public String toAddEvent(Model model,

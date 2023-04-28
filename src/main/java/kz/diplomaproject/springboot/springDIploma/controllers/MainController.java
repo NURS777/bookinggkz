@@ -127,6 +127,28 @@ public class MainController {
         model.addAttribute("topics",topics);
         List<Cities> cities = databaseBean.getAllCities();
         model.addAttribute("cities",cities);
+        List<Users> users = userService.getAllUsers();
+        model.addAttribute("users",users);
+        List<Booking> bookings = databaseBean.getAllBooks();
+        model.addAttribute("books",bookings);
+        List<Organizations> organizations = databaseBean.getAllOrganizations();
+        model.addAttribute("orgs",organizations);
+        model.addAttribute("CURRENT_USER",getUser());
+        if(getUser().getOrganization()!=null){
+            List<Booking> books = databaseBean.getAllBooks();
+            List<Booking> booksOfOrg = new ArrayList<>();
+            if(getUser().getOrganization().getId()!=5&&getUser().getOrganization()!=null){
+
+                for(int i = 0;i<books.size();i++){
+                    if(books.get(i).getEvents().getOrganization().getName().equals(getUser().getFullname())){
+                        booksOfOrg.add(books.get(i));
+                    }
+                }
+                model.addAttribute("books",booksOfOrg);
+            }else {
+                model.addAttribute("bookList",books);
+            }
+        }
         //System.out.println(topics);
         return "homepage";
     }

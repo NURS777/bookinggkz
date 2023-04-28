@@ -2,12 +2,12 @@
      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <div class="text-center welcome"><br><br><h4 th:text="${CURRENT_USER.getFullname()}"></h4></div>
     <div class="list-group pt-lg-5" style="border-radius: 0px">
-        <a th:href="@{'/dashboard'}" class="list-group-item list-group-item-action" sec:authorize="hasAnyRole('ROLE_ADMIN')">Dashboard</a>
+        <a th:href="@{'/homepage'}" class="list-group-item list-group-item-action" sec:authorize="hasAnyRole('ROLE_ADMIN')">Dashboard</a>
         <a th:href="@{'/organizationspage'}"class="list-group-item list-group-item-action" sec:authorize="hasAnyRole('ROLE_ADMIN')">Organizations</a>
         <a th:href="@{'/eventslist'}" class="list-group-item list-group-item-action">Events</a>
         <a th:href="@{'/adminpage'}" class="list-group-item list-group-item-action">Announcement management</a>
         <a th:href="@{'/addtopicpage'}" class="list-group-item list-group-item-action" sec:authorize="hasAnyRole('ROLE_ADMIN')">Topics</a>
-        <a th:href="@{'/orderspage'}"  class="list-group-item list-group-item-action" sec:authorize="hasAnyRole('ROLE_MODERATOR')">Orders</a>
+        <a th:href="@{'/homepage'}"  class="list-group-item list-group-item-action" sec:authorize="hasAnyRole('ROLE_MODERATOR')">Orders</a>
         <a th:href="@{'/accounts'}" class="list-group-item list-group-item-action" sec:authorize="hasAnyRole('ROLE_ADMIN')">Accounts</a>
     </div>
 </div>

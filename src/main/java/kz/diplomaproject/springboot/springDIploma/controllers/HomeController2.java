@@ -79,22 +79,7 @@ public class HomeController2 {
     @GetMapping("/orderspage")
     @PreAuthorize("hasAnyRole('ROLE_MODERATOR')")
     public String getOrderPage(Model model){
-        model.addAttribute("CURRENT_USER",getUser());
-        Long id = getUser().getOrganization().getId();
-        Organizations organization = getUser().getOrganization();
-        List<Booking> books = databaseBean.getAllBooks();
-        List<Booking> booksOfOrg = new ArrayList<>();
-        if(id!=5&&organization!=null){
 
-            for(int i = 0;i<books.size();i++){
-                if(books.get(i).getEvents().getOrganization().getName().equals(getUser().getFullname())){
-                    booksOfOrg.add(books.get(i));
-                }
-            }
-            model.addAttribute("books",booksOfOrg);
-        }else {
-            model.addAttribute("bookList",books);
-        }
         return "orderspage";
     }
 }

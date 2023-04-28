@@ -10,7 +10,12 @@
 
             </div>
             <div style="position:static">
-                <div th:insert="~{bottom.html}"></div>
+                <div sec:authorize="hasAnyRole('ROLE_USER')">
+                    <div th:insert="~{bottom.html}"></div>
+                </div>
+                <div sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_MODERATOR')">
+                    <div th:insert="~{bottomforadmin.html}"></div>
+                </div>
             </div>
         </div>
     </body>
