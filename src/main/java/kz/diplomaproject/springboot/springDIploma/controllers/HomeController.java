@@ -131,7 +131,7 @@ public class HomeController {
 
                     byte[] bytes = file.getBytes();
                     Path path = Paths.get(uploadPath + picName+".jpg");
-                    Files.write(path, bytes);
+                    Files.write(path.toAbsolutePath(), bytes);
 
                     events.setEventImg(picName);
 
@@ -243,7 +243,7 @@ public class HomeController {
 
                     byte[] bytes = file.getBytes();
                     Path path = Paths.get(uploadPathT + picName+".jpg");
-                    Files.write(path, bytes);
+                    Files.write(path.toAbsolutePath(), bytes);
 
                     topic.setTopicImg(picName);
 
