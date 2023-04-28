@@ -19,11 +19,12 @@
     <div class="row ms-4">
       <div class="col-12 d-flex flex-wrap" >
         <a th:href="@{'/details/' + ${ev.getId()} + '-page.html'}" style="color:black;text-decoration: none" th:each="ev : ${events}">
-          <div class="card mt-4 ms-5" style="width: 18rem;" th:each="top : ${ev.getTopics()}" th:if="${top.getId()==topic.getId()}">
-            <img th:src="@{'/viewphoto/'+${ev.getEventImg()}}" class="img" alt="...">
+          <div class="card mt-4 ms-5" style="width: 18rem;box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);border-radius: 10px" th:each="top : ${ev.getTopics()}" th:if="${top.getId()==topic.getId()}">
+            <img th:src="@{'/viewphoto/'+${ev.getEventImg()}}" class="img" alt="..."style="border-top-left-radius:10px;border-top-right-radius: ;:10px">
             <div class="card-body">
               <h5 class="card-title" th:text="${ev.getName()}"></h5>
-              <p class="card-text" th:text="${ev.getDescription()}"></p>
+              <p class="card-text" th:text="${ev.getTitle()}"></p><br>
+              <b th:text="${ev.getDate()}"></b>
             </div>
           </div>
         </a>
