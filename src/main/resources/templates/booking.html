@@ -20,7 +20,7 @@
   <div class="container-fluid" style="padding-left: 7%">
       <div class="d-flex flex-wrap">
         <a th:href="@{'/details/' + ${ev.getId()} + '-page.html'}" style="color:black;text-decoration: none" th:each="ev : ${events}">
-          <div class="card mt-4  me-5" style="width: 18rem;box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);border-radius: 10px" th:each="top : ${ev.getTopics()}" th:if="${top.getId()==topic.getId()}">
+          <div class="card mt-4  me-4" style="width: 18rem;box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);border-radius: 10px" th:each="top : ${ev.getTopics()}" th:if="${top.getId()==topic.getId()}">
             <img th:src="@{'/viewphoto/'+${ev.getEventImg()}}" class="img" alt="..."style="border-top-left-radius:10px;border-top-right-radius:10px;height: 200px">
             <div class="card-body">
               <h5 class="card-title" th:text="${ev.getName()}"></h5>
