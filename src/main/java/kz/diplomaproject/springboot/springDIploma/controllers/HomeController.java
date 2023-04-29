@@ -155,29 +155,6 @@ public class HomeController {
         return IOUtils.toByteArray(in);
     }
 
-    @GetMapping(value = "/viewTphoto/{url}",produces = {MediaType.IMAGE_JPEG_VALUE,MediaType.IMAGE_PNG_VALUE})
-    @PreAuthorize("isAuthenticated()")
-    public @ResponseBody byte[] viewTopicPhoto(@PathVariable(name = "url") String url) throws IOException {
-        String pictureUrl = viewPathT+defaultPictureT;
-        if(url!=null&&!url.equals("null")){
-            pictureUrl = viewPathT+url+".jpg";
-        }
-
-        InputStream in;
-        try{
-            ClassPathResource resource = new ClassPathResource(pictureUrl);
-            in = resource.getInputStream();
-        }catch (Exception e){
-            ClassPathResource resource = new ClassPathResource(viewPathT+defaultPictureT);
-            in = resource.getInputStream();
-            e.printStackTrace();
-        }
-
-        return IOUtils.toByteArray(in);
-    }
-
-
-
     @GetMapping("/eventslist")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MODERATOR')")
     public String evenstList(Model model){
@@ -242,6 +219,17 @@ public class HomeController {
             }
         model.addAttribute("CURRENT_USER",getUser());
         return "redirect:/addtopicpage?erroradd";
+    }
+
+    @GetMapping("/organizationspage")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    public String getOrgsPage(Model model){
+        model.addAttribute("CURRENT_USER",getUser());
+        List<Organizations> organizations = databaseBean.getAllOrganizations();
+        List<Users> users = userService.getAllUsers();
+        model.addAttribute("users",users);
+        model.addAttribute("orgs",organizations);
+        return "organizationspage";
     }
 
     @GetMapping("/accounts")

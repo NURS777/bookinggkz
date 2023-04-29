@@ -53,6 +53,7 @@ public class BookController {
             booking.setEvents(event);
             booking.setNumberoftickets(tickets);
             booking.setPhoneforbook(phone);
+            booking.setStatus("unbooked");
             Users user = getUser();
             booking.setUsers(user);
             databaseBean.addBooking(booking);
@@ -62,7 +63,7 @@ public class BookController {
     }
 
     @GetMapping("/myorders")
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("hasAnyRole('ROLE_USER')")
     public String myOrders(Model model){
         List<Booking> books = databaseBean.getAllBooks();
         List<Booking> booksOfUser = new ArrayList<>();
@@ -77,7 +78,7 @@ public class BookController {
     }
 
     @PostMapping("/deletebook")
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("hasAnyRole('ROLE_USER')")
     public String deleteBook(Model model,
                              @RequestParam(name = "id") Long id){
         Booking booking = databaseBean.getBook(id);

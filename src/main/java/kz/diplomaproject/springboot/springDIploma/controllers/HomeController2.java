@@ -41,45 +41,25 @@ public class HomeController2 {
         }return null;
     }
 
-
-    @GetMapping("/organizationspage")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MODERATOR')")
-    public String getOrgsPage(Model model){
-        model.addAttribute("CURRENT_USER",getUser());
-        List<Organizations> organizations = databaseBean.getAllOrganizations();
-        List<Users> users = userService.getAllUsers();
-        model.addAttribute("users",users);
-        model.addAttribute("orgs",organizations);
-        return "organizationspage";
-    }
-
-    @PostMapping("/addorgan")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
-    public String toRegister(Model model,
-                             @RequestParam(name = "org_name") String name,
-                             @RequestParam(name = "org_password") String pass,
-                             @RequestParam(name = "org_email") String email,
-                             @RequestParam(name = "org_phone") String phone){
-        Users user = new Users();
-        Organizations organization = new Organizations();
-        organization.setName(name);organization.setPhonenumber(phone);organization.setCity(null);
-        databaseBean.addOrgan(organization);
-        user.setCity(null);user.setFullname(name);user.setTopics(null);
-        user.setEmail(email);user.setPhonenumber(phone);user.setBirthdate(null);
-        user.setPassword(passwordEncoder.encode(pass));user.setOrganization(organization);
-
-
-        if(userService.addUserModer(user)!=null){
-
-            return "redirect:/organizationspage?orgsuccess";
+    @PostMapping("/bookuser")
+    public String BookUser(@RequestParam(name = "id") Long id){
+        Booking booking = databaseBean.getBook(id);
+        if(booking!=null){
+            booking.setStatus("booked");
+            databaseBean.updateBook(booking);
+            return "redirect:/homepage?successbook";
         }
-        return "redirect:/organizationspage?orgerror";
+        return "redirect:/homepage?errorbook";
     }
 
-    @GetMapping("/orderspage")
-    @PreAuthorize("hasAnyRole('ROLE_MODERATOR')")
-    public String getOrderPage(Model model){
-
-        return "orderspage";
+    @PostMapping("/cancelbookuser")
+    public String CancelBookUser(@RequestParam(name = "id") Long id){
+        Booking booking = databaseBean.getBook(id);
+        if(booking!=null){
+            booking.setStatus("unbooked");
+            databaseBean.updateBook(booking);
+            return "redirect:/homepage?successcancel";
+        }
+        return "redirect:/homepage?errorcances";
     }
 }

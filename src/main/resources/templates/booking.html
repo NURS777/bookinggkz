@@ -3,11 +3,13 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
       layout:decorate="~{layout/main.html}">
 <div layout:fragment="siteContent">
-  <div class="bg-image" th:style="'background-image: url(' + @{'/viewTphoto/'+${topic.getTopicImg()}} + '); height: 80vh;'">
-    <div th:insert="~{centerlinks.html}"></div>
+  <div class="bg-image block" th:style="'background-image: url(' + @{'/viewTphoto/'+${topic.getTopicImg()}} + '); height: 80vh;'">
+    <div class="container-fluid-lg ps-5 pb-5 pt-2">
+      <div th:insert="~{centerlinks.html}"></div>
+    </div>
   </div>
-  <div class="container-fluid mt-3" style="margin-left: 5%">
-    <span style="font-family: 'Roboto';font-weight: 500;font-size: 22px;margin-left: 1%">You can find by yourself</span>
+  <div class="container-fluid mt-3" style="padding-left: 7%">
+    <span style="font-family: 'Roboto';font-weight: 500;font-size: 22px;">You can find by yourself</span>
     <div class="input-group rounded  mb-3" style="width: 30%">
       <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
       <span class="input-group-text border-0" id="search-addon">
@@ -15,12 +17,11 @@
   </span>
     </div>
   </div>
-  <div class="container-fluid">
-    <div class="row ms-4">
-      <div class="col-12 d-flex flex-wrap" >
+  <div class="container-fluid" style="padding-left: 7%">
+      <div class="d-flex flex-wrap">
         <a th:href="@{'/details/' + ${ev.getId()} + '-page.html'}" style="color:black;text-decoration: none" th:each="ev : ${events}">
-          <div class="card mt-4 ms-5" style="width: 18rem;box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);border-radius: 10px" th:each="top : ${ev.getTopics()}" th:if="${top.getId()==topic.getId()}">
-            <img th:src="@{'/viewphoto/'+${ev.getEventImg()}}" class="img" alt="..."style="border-top-left-radius:10px;border-top-right-radius:10px">
+          <div class="card mt-4  me-5" style="width: 18rem;box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);border-radius: 10px" th:each="top : ${ev.getTopics()}" th:if="${top.getId()==topic.getId()}">
+            <img th:src="@{'/viewphoto/'+${ev.getEventImg()}}" class="img" alt="..."style="border-top-left-radius:10px;border-top-right-radius:10px;height: 200px">
             <div class="card-body">
               <h5 class="card-title" th:text="${ev.getName()}"></h5>
               <p class="card-text" th:text="${ev.getTitle()}"></p><br>
@@ -28,7 +29,6 @@
             </div>
           </div>
         </a>
-      </div>
     </div>
   </div>
 </div>

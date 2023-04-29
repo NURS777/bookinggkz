@@ -82,5 +82,8 @@ public class DatabaseBean {
     public void deleteBook(Long id){
         bookingRepository.deleteById(id);
     }
+    public void updateBook(Booking booking){
+        bookingRepository.save(booking);
+    }
 
 }

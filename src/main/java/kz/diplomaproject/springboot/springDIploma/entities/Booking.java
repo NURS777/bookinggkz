@@ -24,6 +24,10 @@ public class Booking {
     @Column(name = "numberoftickets")
     private String numberoftickets;
 
+    @Column(name = "status")
+    private String status;
+
+
     @ManyToOne(fetch = FetchType.LAZY)
     private ManageEvents events;
 

@@ -3,8 +3,12 @@ package kz.diplomaproject.springboot.springDIploma.controllers;
 import kz.diplomaproject.springboot.springDIploma.beans.DatabaseBean;
 import kz.diplomaproject.springboot.springDIploma.entities.*;
 import kz.diplomaproject.springboot.springDIploma.services.UserService;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -15,6 +19,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.PasswordAuthentication;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -32,7 +38,26 @@ public class MainController {
     @Autowired
     private UserService userService;
 
+    @Value("${file.eimages.viewPath}")
+    private String viewPath;
+
+    @Value("${file.eimages.uploadPath}")
+    private String uploadPath;
+
+    @Value("${file.eimages.defaultPicture}")
+    private String defaultPicture;
+
+    @Value("${file.timages.viewPath}")
+    private String viewPathT;
+
+    @Value("${file.timages.uploadPath}")
+    private String uploadPathT;
+
+    @Value("${file.timages.defaultPicture}")
+    private String defaultPictureT;
+
     @GetMapping( value = "/mainpage")
+    @PreAuthorize("isAnonymous()")
     public String mainpage(Model model){
         model.addAttribute("CURRENT_USER",getUser());
         List<Topics> topics = databaseBean.getAllTopics();
@@ -43,6 +68,7 @@ public class MainController {
     }
 
     @GetMapping( value = "/")
+    @PreAuthorize("isAnonymous()")
     public String index(Model model){
         List<Topics> topics = databaseBean.getAllTopics();
         model.addAttribute("topics",topics);
@@ -60,63 +86,11 @@ public class MainController {
         }return null;
     }
 
-    @PostMapping("/signup")
-    public String toRegister(Model model,
-            @RequestParam(name = "user_name") String name,
-                             @RequestParam(name = "user_birthday") Date date,
-                             @RequestParam(name = "user_email") String email,
-                             @RequestParam(name = "user_phone") String phone,
-                             @RequestParam(name = "user_password") String password,
-                             @RequestParam(name = "user_city") String city,
-                             @RequestParam(name = "user_category") Long topic_id){
-        Topics topic = databaseBean.getTopic(topic_id);
-        Users user = new Users();
-        if(topic!=null){
-            user.setFullname(name);user.setBirthdate(date);user.setEmail(email);
-            user.setPhonenumber(phone);user.setCity(city);
-            user.setTopics(topic);
-            user.setPassword(passwordEncoder.encode(password));
-        }
-
-        if(userService.addUser(user)!=null){
-
-            return "redirect:/mainpage?emailsuccess";
-        }
-        return "redirect:/mainpage?emailerror";
-
-    }
-
-
     @GetMapping("/profile")
     @PreAuthorize("isAuthenticated()")
     public String profile(Model model){
         model.addAttribute("CURRENT_USER",getUser());
         return "profile";
-    }
-
-    @PostMapping("toupdatepassword")
-    @PreAuthorize("isAuthenticated()")
-    public String toUpdatePass(@RequestParam(name = "user_oldpass") String oldpass,
-                               @RequestParam(name = "user_newpass") String newpass,
-                               @RequestParam(name = "user_renewpass") String renewpass){
-
-        Users currentUser = getUser();
-        if(newpass.equals(renewpass)){
-            if(passwordEncoder.matches(oldpass,currentUser.getPassword())){
-
-                currentUser.setPassword(passwordEncoder.encode(newpass));
-
-                userService.updateUser(currentUser);
-                return "redirect:/profile?passwordsuccess";
-            }
-            return "redirect:/profile?oldpasserror";
-        }
-        return "redirect:/profile?passworderror";
-    }
-    @GetMapping("/accessdeniedpage")
-    public String accessDeniedPage(Model model){
-        model.addAttribute("CURRENT_USER",getUser());
-        return "403";
     }
 
     @GetMapping("/homepage")
@@ -174,6 +148,27 @@ public class MainController {
         List<Topics> topics = databaseBean.getAllTopics();
         model.addAttribute("topics",topics);
         return "bookbycity";
+    }
+
+    @GetMapping(value = "/viewTphoto/{url}",produces = {MediaType.IMAGE_JPEG_VALUE,MediaType.IMAGE_PNG_VALUE})
+    @PreAuthorize("isAuthenticated()")
+    public @ResponseBody byte[] viewTopicPhoto(@PathVariable(name = "url") String url) throws IOException {
+        String pictureUrl = viewPathT+defaultPictureT;
+        if(url!=null&&!url.equals("null")){
+            pictureUrl = viewPathT+url+".jpg";
+        }
+
+        InputStream in;
+        try{
+            ClassPathResource resource = new ClassPathResource(pictureUrl);
+            in = resource.getInputStream();
+        }catch (Exception e){
+            ClassPathResource resource = new ClassPathResource(viewPathT+defaultPictureT);
+            in = resource.getInputStream();
+            e.printStackTrace();
+        }
+
+        return IOUtils.toByteArray(in);
     }
 
     @GetMapping( "details/{eventId}-page.html")

@@ -55,21 +55,24 @@
                     </div>
                     <div class="container mb-lg-3">
                         <div class="row">
-                            <div class="col-lg-3">
+                            <div class="col-lg-4">
                                 <div class="ms-3 mb-3 text-center statistica" style="background-color: #7492FF">
                                     <b th:text="${books.size()}"></b> orders
                                 </div>
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-4">
                                 <div class="ms-3 mb-3 text-center statistica" style="background-color: #66EDFF">
                                     <b th:text="${users.size()}"></b> activ accounts
                                 </div>
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-4">
                                 <div class="ms-3 mb-3 text-center statistica" style="background-color: #FF8383">
                                     <b th:text="${orgs.size()}"></b> partners
                                 </div>
                             </div>
+                        </div>
+                        <div>
+
                         </div>
                     </div>
                 </div>
@@ -88,7 +91,7 @@
                         Orders
                     </div>
                     <div class="mb-3">
-                        <div style="position: relative;height: 400px;overflow: auto;display: block">
+                        <div style="position: relative;height: 360px;overflow: auto;display: block">
                             <table class="table table-striped mt-3" style="background: #FFFFFF;border: 1px solid #9D9D9D;box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);border-radius: 5px">
                                 <thead>
                                 <th>Order number</th>
@@ -96,14 +99,35 @@
                                 <th>Date</th>
                                 <th>Phone number of client</th>
                                 <th>Number of tickets</th>
+                                <th></th>
                                 </thead>
                                 <tbody>
                                 <tr th:each="b:${books}">
-                                    <td th:text="${b.getId()}"></td>
-                                    <td th:text="${b.getEvents().getName()}"></td>
-                                    <td th:text="${b.getEvents().getDate()}"></td>
-                                    <td th:text="${b.getPhoneforbook()}"></td>
-                                    <td th:text="${b.getNumberoftickets()}"></td>
+                                    <form th:action="@{/bookuser}" method="post" th:if="${b.getStatus().equals('unbooked')}">
+                                        <input type="hidden" th:value="${b.getId()}" name="id">
+                                        <td th:text="${b.getId()}"></td>
+                                        <td th:text="${b.getEvents().getName()}"></td>
+                                        <td th:text="${b.getEvents().getDate()}"></td>
+                                        <td th:text="${b.getPhoneforbook()}"></td>
+                                        <td th:text="${b.getNumberoftickets()}"></td>
+                                        <td width="10%">
+                                            <button class="btn btn-success btn-sm">book</button>
+                                        </td>
+                                    </form>
+                                </tr>
+
+                                <tr th:each="b:${books}" th:if="${b.getStatus().equals('booked')}">
+                                    <form th:action="@{/cancelbookuser}" method="post">
+                                        <input type="hidden" th:value="${b.getId()}" name="id">
+                                        <td th:text="${b.getId()}"></td>
+                                        <td th:text="${b.getEvents().getName()}"></td>
+                                        <td th:text="${b.getEvents().getDate()}"></td>
+                                        <td th:text="${b.getPhoneforbook()}"></td>
+                                        <td th:text="${b.getNumberoftickets()}"></td>
+                                        <td width="10%">
+                                            <button class="btn btn-danger btn-sm">cancel</button>
+                                        </td>
+                                    </form>
                                 </tr>
                                 </tbody>
                             </table>

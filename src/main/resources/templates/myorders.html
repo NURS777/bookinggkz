@@ -18,7 +18,7 @@
                                 <b >Organizator: </b><b th:text="${b.getEvents().getOrganization().getName()}"></b><br>
                                 <b th:text="${b.getNumberoftickets()}"></b> <b class="card-text"> person</b>
                             </div>
-                            <div style="width: 25%;text-align: justify" class="mt-4">
+                            <div style="width: 25%;text-align: justify" class="mt-4" th:if="${b.getStatus().equals('unbooked')}">
                                 <form th:action="@{/deletebook}" method="post">
                                     <input class="form-control" type="hidden" name="id" th:value="${b.getId()}">
                                     <button class="btn-info" style="border-radius: 5px;">Cancel</button>
