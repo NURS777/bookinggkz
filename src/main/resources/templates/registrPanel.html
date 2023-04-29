@@ -164,7 +164,7 @@
 
     <div id="changePass" style="position: absolute">
       <div class="alert alert-danger alert-dismissible fade show mx-auto" role="alert" style="width: 80%" th:if = "${param.passwordchangeerror!=null}">
-        Password are not same !
+        Passwords are not same !
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         <script type="text/javascript">
           document.querySelector('.container.registr').style.visibility='visible';
@@ -225,11 +225,16 @@
       <div id="goodchange" style="position: absolute">
           <div class="container">
             <div class="row">
-              <div class="col-lg-12 pt-4 ps-4 pe-4">
-                <img src="/css/image%2013.png">
-                <img src="/css/image%2014.png">
+              <div class="col-lg-12  ps-4">
+                <div class="text-center" style="font-family: 'Inter';font-weight:500;color: #6D6D6D;text-align: center">
+                  Well done ! <br>Password changed successfully
+                </div>
+                <div class="p-5">
+                  <img class="ms4-3" src="/css/image%2013.png" style="width: 40%">
+                  <img class="ms-3" src="/css/image%2014.png" style="width: 40%">
+                </div>
                 <div class="col-md-12 mt-4 text-center">
-                  <button class="submitAcc">Continue</button>
+                  <button type="button" class="submitAcc continue">Continue</button>
                 </div>
               </div>
             </div>

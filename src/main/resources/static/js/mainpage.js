@@ -40,6 +40,7 @@ const signup = document.querySelector('.sign_Up');
 const btn = document.getElementById('btn');
 const getAcc = document.querySelector('.buttongetAcc.getAcc');
 const forgot = document.querySelector('.forgot');
+const contin = document.querySelector('.continue');
 
 document.addEventListener('click',(e)=>{
 	const click = e.composedPath().includes(container);
@@ -47,7 +48,8 @@ document.addEventListener('click',(e)=>{
 	const click2 = e.composedPath().includes(signup);
 	const click3 = e.composedPath().includes(getAcc);
 	const click4 = e.composedPath().includes(forgot);
-	if(!click&&!click1&&!click2&&!click3&&!click4){
+	const click5 = e.composedPath().includes(contin);
+	if(!click&&!click1&&!click2&&!click3&&!click4&&click5){
 		container.style.visibility = 'hidden';
 		main.style.opacity = "100%";
 		btn.style.transition = '.0s';
@@ -174,5 +176,26 @@ forgot.addEventListener('click',()=>{
 	gc.style.bottom = '1000px';
 	gc.style.position = 'absolute';
 })
+
+contin.addEventListener('click',()=>{
+	container.style.visibility='visible';
+	z.style.left = "50%";
+	x.style.bottom = "-1000px"
+	x.style.position = 'static'
+	y.style.position = 'absolute'
+	y.style.bottom = "1000px"
+	btn.style.transition = '.5s';
+	main.style.opacity = "60%";
+	f.style.bottom = "1000px";
+	f.style.position = 'absolute';
+	fo.style.bottom = '1000px';
+	fo.style.position = 'absolute';
+	c.style.bottom = '1000px';
+	c.style.position = 'absolute';
+	gc.style.bottom = '1000px';
+	gc.style.position = 'absolute';
+})
+
+
 
 

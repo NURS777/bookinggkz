@@ -214,8 +214,9 @@ input::-webkit-inner-spin-button {
 
 @media screen and (max-width: 600px){
 	.registration{
-		width: 100%;
-		left: 50%;
-		transform: translateX(-50%);
+		width: 65%;
+		left: 37%;
+		top:-20%;
+		transform: translate(-37%,20%);
 	}
 }
