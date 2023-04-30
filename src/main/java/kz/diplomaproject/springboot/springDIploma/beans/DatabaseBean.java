@@ -26,6 +26,8 @@ public class DatabaseBean {
     @Autowired
     private BookingRepository bookingRepository;
 
+    @Autowired
+    private FeedbackRepository feedbackRepository;
     public List<Cities> getAllCities(){return citiesRepository.findAll();}
     public Cities getCity(Long id){
         Optional<Cities> optional = citiesRepository.findById(id);
@@ -85,5 +87,7 @@ public class DatabaseBean {
     public void updateBook(Booking booking){
         bookingRepository.save(booking);
     }
+
+    public void addFeedback(Feedbacks feedbacks){feedbackRepository.save(feedbacks);}
 
 }

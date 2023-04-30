@@ -17,8 +17,24 @@
     border-radius:30px;
 }
 
+.feedb{
+    visibility: hidden;
+    overflow: hidden;
+}
 
+.icons button{
+    background-color: snow;
+    border: 0px;
+}
 
+.icons:hover button{
+    cursor: pointer;
+    opacity: .2;
+}
+
+.container .icons button:hover{
+    opacity: 1;
+}
 .titles{
     font-family: 'Roboto';
     font-style: normal;

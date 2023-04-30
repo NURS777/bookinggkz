@@ -1,0 +1,46 @@
+<div class="container feedb"  xmlns:th="http://www.thymeleaf.org">
+  <div class="row">
+    <div class="col-4 p-3 feedback" style=" position: fixed;background-color: snow ;top:20%;left: 35%;right: 30%; border-radius: 15px;">
+      <div class="mb-3" style="font-family: 'Inter';font-weight:500; color: #6D6D6D;text-align: center">
+        Thank you, your application has been accepted! The organizer will contact you!<br>
+        <b style="font-size: 20px;color: #1a1e21">Please,rate !How do you like our services?!</b>
+      </div>
+      <div class="icons mt-2">
+        <div class="row">
+          <div class="col-lg-3">
+            <form th:action="@{'/feedbackTwo'}" method="post">
+              <input type="hidden" name="rating" th:value="2">
+              <button><img src=/css/11s.png style="width: 50px"></button>
+            </form>
+          </div>
+          <div class="col-lg-3">
+            <form th:action="@{'/feedbackThree'}" method="post">
+              <input type="hidden" name="rating" th:value="3">
+              <button><img src=/css/22.png style="width: 50px"></button>
+            </form>
+          </div>
+          <div class="col-lg-3">
+            <form th:action="@{'/feedbackFour'}" method="post">
+              <input type="hidden" name="rating" th:value="4">
+              <button><img src=/css/55s.png style="width: 50px"></button>
+            </form>
+          </div>
+          <div class="col-lg-3">
+            <form th:action="@{'/feedbackFive'}" method="post">
+              <input type="hidden" name="rating" th:value="5">
+              <button><img src=/css/44s.png style="width: 50px"></button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div th:if = "${param.booksuccess!=null}">
+  <script type="text/javascript">
+    document.querySelector('.container.feedb').style.visibility = 'visible';
+    document.querySelector('.main').style.opacity = '60%';
+  </script>
+</div>
+

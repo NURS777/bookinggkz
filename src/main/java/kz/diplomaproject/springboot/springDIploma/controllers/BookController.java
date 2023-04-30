@@ -2,6 +2,7 @@ package kz.diplomaproject.springboot.springDIploma.controllers;
 
 import kz.diplomaproject.springboot.springDIploma.beans.DatabaseBean;
 import kz.diplomaproject.springboot.springDIploma.entities.Booking;
+import kz.diplomaproject.springboot.springDIploma.entities.Feedbacks;
 import kz.diplomaproject.springboot.springDIploma.entities.ManageEvents;
 import kz.diplomaproject.springboot.springDIploma.entities.Users;
 import kz.diplomaproject.springboot.springDIploma.services.UserService;
@@ -85,6 +86,46 @@ public class BookController {
         if(booking!=null){
             databaseBean.deleteBook(id);
         }
+        return "redirect:/myorders";
+    }
+
+    @PostMapping("/feedbackTwo")
+    @PreAuthorize("hasAnyRole('ROLE_USER')")
+    public String feedbackOne(Model model,
+                              @RequestParam(name = "rating") int rating){
+            Feedbacks feedbacks = new Feedbacks();
+            feedbacks.setFeedback("two");
+            databaseBean.addFeedback(feedbacks);
+            return "redirect:/myorders";
+    }
+
+    @PostMapping("/feedbackThree")
+    @PreAuthorize("hasAnyRole('ROLE_USER')")
+    public String feedbackThree(Model model,
+                              @RequestParam(name = "rating") int rating){
+        Feedbacks feedbacks = new Feedbacks();
+        feedbacks.setFeedback("three");
+        databaseBean.addFeedback(feedbacks);
+        return "redirect:/myorders";
+    }
+
+    @PostMapping("/feedbackFour")
+    @PreAuthorize("hasAnyRole('ROLE_USER')")
+    public String feedbackFour(Model model,
+                              @RequestParam(name = "rating") int rating){
+        Feedbacks feedbacks = new Feedbacks();
+        feedbacks.setFeedback("four");
+        databaseBean.addFeedback(feedbacks);
+        return "redirect:/myorders";
+    }
+
+    @PostMapping("/feedbackFive")
+    @PreAuthorize("hasAnyRole('ROLE_USER')")
+    public String feedbackFive(Model model,
+                              @RequestParam(name = "rating") int rating){
+        Feedbacks feedbacks = new Feedbacks();
+        feedbacks.setFeedback("five");
+        databaseBean.addFeedback(feedbacks);
         return "redirect:/myorders";
     }
 }
