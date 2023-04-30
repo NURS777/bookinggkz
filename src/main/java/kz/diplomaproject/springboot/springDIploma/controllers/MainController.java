@@ -2,6 +2,7 @@ package kz.diplomaproject.springboot.springDIploma.controllers;
 
 import kz.diplomaproject.springboot.springDIploma.beans.DatabaseBean;
 import kz.diplomaproject.springboot.springDIploma.entities.*;
+import kz.diplomaproject.springboot.springDIploma.repositories.RoleRepository;
 import kz.diplomaproject.springboot.springDIploma.services.UserService;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,9 @@ public class MainController {
     private DatabaseBean databaseBean;
 
     @Autowired
+    private RoleRepository roleRepository;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
@@ -57,24 +61,38 @@ public class MainController {
     private String defaultPictureT;
 
     @GetMapping( value = "/mainpage")
-    @PreAuthorize("isAnonymous()")
     public String mainpage(Model model){
         model.addAttribute("CURRENT_USER",getUser());
         List<Topics> topics = databaseBean.getAllTopics();
         model.addAttribute("topics",topics);
         List<Cities> cities = databaseBean.getAllCities();
         model.addAttribute("cities",cities);
+        Roles roles = roleRepository.findByRole("ROLE_ADMIN");
+        Roles roles2 = roleRepository.findByRole("ROLE_MODERATOR");
+        Roles roles3 = roleRepository.findByRole("ROLE_USER");
+        if(getUser()!=null){
+            if(getUser().getRoles().contains(roles)||getUser().getRoles().contains(roles2)||getUser().getRoles().contains(roles3)){
+                return "redirect:/homepage";
+            }else { return  "mainpage";}
+        }
         return "mainpage";
     }
 
     @GetMapping( value = "/")
-    @PreAuthorize("isAnonymous()")
     public String index(Model model){
         List<Topics> topics = databaseBean.getAllTopics();
         model.addAttribute("topics",topics);
         List<Cities> cities = databaseBean.getAllCities();
         model.addAttribute("cities",cities);
         model.addAttribute("CURRENT_USER",getUser());
+        Roles roles = roleRepository.findByRole("ROLE_ADMIN");
+        Roles roles2 = roleRepository.findByRole("ROLE_MODERATOR");
+        Roles roles3 = roleRepository.findByRole("ROLE_USER");
+        if(getUser()!=null){
+            if(getUser().getRoles().contains(roles)||getUser().getRoles().contains(roles2)||getUser().getRoles().contains(roles3)){
+                return "redirect:/homepage";
+            }else { return  "mainpage";}
+        }
         return "mainpage";
     }
 
@@ -137,6 +155,13 @@ public class MainController {
         model.addAttribute("topics",topics);
         List<Cities> cities = databaseBean.getAllCities();
         model.addAttribute("cities",cities);
+        Roles roles = roleRepository.findByRole("ROLE_ADMIN");
+        Roles roles2 = roleRepository.findByRole("ROLE_MODERATOR");
+        if(getUser()!=null){
+            if(getUser().getRoles().contains(roles)||getUser().getRoles().contains(roles2)){
+                return "redirect:/homepage";
+            }
+        }
         return "booking";
     }
     @GetMapping("/bookbycity")
@@ -147,6 +172,13 @@ public class MainController {
         model.addAttribute("events",events);
         List<Topics> topics = databaseBean.getAllTopics();
         model.addAttribute("topics",topics);
+        Roles roles = roleRepository.findByRole("ROLE_ADMIN");
+        Roles roles2 = roleRepository.findByRole("ROLE_MODERATOR");
+        if(getUser()!=null){
+            if(getUser().getRoles().contains(roles)||getUser().getRoles().contains(roles2)){
+                return "redirect:/homepage";
+            }
+        }
         return "bookbycity";
     }
 
@@ -177,6 +209,13 @@ public class MainController {
         model.addAttribute("CURRENT_USER",getUser());
         ManageEvents event = databaseBean.getEvent(id);
         model.addAttribute("event",event);
+        Roles roles = roleRepository.findByRole("ROLE_ADMIN");
+        Roles roles2 = roleRepository.findByRole("ROLE_MODERATOR");
+        if(getUser()!=null){
+            if(getUser().getRoles().contains(roles)||getUser().getRoles().contains(roles2)){
+                return "redirect:/homepage";
+            }
+        }
         return "details";
     }
 
@@ -191,6 +230,13 @@ public class MainController {
         model.addAttribute("topic",topic);
         List<Topics> topics = databaseBean.getAllTopics();
         model.addAttribute("topics",topics);
+        Roles roles = roleRepository.findByRole("ROLE_ADMIN");
+        Roles roles2 = roleRepository.findByRole("ROLE_MODERATOR");
+        if(getUser()!=null){
+            if(getUser().getRoles().contains(roles)||getUser().getRoles().contains(roles2)){
+                return "redirect:/homepage";
+            }
+        }
         return "booking";
     }
 }

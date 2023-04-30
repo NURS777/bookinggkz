@@ -49,7 +49,7 @@ document.addEventListener('click',(e)=>{
 	const click3 = e.composedPath().includes(getAcc);
 	const click4 = e.composedPath().includes(forgot);
 	const click5 = e.composedPath().includes(contin);
-	if(!click&&!click1&&!click2&&!click3&&!click4&&click5){
+	if(!click&&!click1&&!click2&&!click3&&!click4&&!click5){
 		container.style.visibility = 'hidden';
 		main.style.opacity = "100%";
 		btn.style.transition = '.0s';
