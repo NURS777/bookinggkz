@@ -28,8 +28,6 @@
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item"th:href="@{'/profile'}">Profile</a></li>
                             <li><a class="dropdown-item"th:href="@{'/myorders'}" sec:authorize="hasAnyRole('ROLE_USER')">My orders</a></li>
-                            <li><a class="dropdown-item" th:href="@{'/adminpage'}"
-                                   sec:authorize="hasAnyRole('ROLE_MODERATOR')">Study</a></li>
                             <li><a class="dropdown-item" href="JavaScript:void (0)" onclick="logout()">Logout</a></li>
                         </ul>
                         <script type="text/javascript">
