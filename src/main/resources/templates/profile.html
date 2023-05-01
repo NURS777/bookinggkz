@@ -15,10 +15,10 @@
                   <div class="mb-3 ms-lg-5">
                       <b>Phone number: </b><span th:text="${CURRENT_USER.getPhonenumber()}"></span>
                   </div>
-                  <div class="mb-3 ms-lg-5">
-                      <b>City: </b><span th:text="${CURRENT_USER.getCity()}"></span>
+                  <div class="mb-3 ms-lg-5" sec:authorize="hasAnyRole('ROLE_USER')">
+                      <b>City: </b><span th:text="${CURRENT_USER.getCity().getName()}"></span>
                   </div>
-                  <div class="mb-3 ms-lg-5">
+                  <div class="mb-3 ms-lg-5" sec:authorize="hasAnyRole('ROLE_USER')">
                       <b>Birthday: </b><span th:text="${CURRENT_USER.getBirthdate()}"></span>
                   </div>
               </div>

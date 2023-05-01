@@ -30,7 +30,7 @@
                         </div>
                         <div class="row" style="padding-top: 100px;padding-right: 150px;">
                             <div class="col-lg-6 mx-auto">
-                                <a th:href="@{'/booking'}">
+                                <a th:href="@{'/bookingByTopic/' + ${CURRENT_USER.getId()} + '-page.html'}">
                                     <button  type="submit" class="btn-info">
                                         Book Now!
                                     </button>
@@ -57,22 +57,51 @@
                         <div class="row">
                             <div class="col-lg-4">
                                 <div class="ms-3 mb-3 text-center statistica" style="background-color: #7492FF">
-                                    <b th:text="${books.size()}"></b> orders
+                                    <b th:text="${books.size()}"></b> <br><span>orders</span>
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="ms-3 mb-3 text-center statistica" style="background-color: #66EDFF">
-                                    <b th:text="${users.size()}"></b> activ accounts
+                                    <b th:text="${users.size()}"></b><br> <span>activ accounts</span>
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="ms-3 mb-3 text-center statistica" style="background-color: #FF8383">
-                                    <b th:text="${orgs.size()}"></b> partners
+                                    <b th:text="${orgs.size()}"></b><br> <span>partners</span>
                                 </div>
                             </div>
                         </div>
-                        <div>
-
+                        <div class="row pt-lg-3 pb-lg-3 titles">
+                            <div class="col-lg-12 text-center">
+                                <b style="font-size: 75%;font-weight: 450">Feedbacks:</b>
+                            </div>
+                        </div>
+                        <div class="row ps-lg-5" style="margin-left:2%">
+                            <div class="col-3">
+                                <img src=/css/11s.png style="width: 50px">:<b th:text="${fTwo.size()}"></b>
+                            </div>
+                            <div class="col-3">
+                                <img src=/css/22.png style="width: 50px">:<b th:text="${fThree.size()}"></b>
+                            </div>
+                            <div class="col-3">
+                                <img src=/css/55s.png style="width: 50px">:<b th:text="${fFour.size()}"></b>
+                            </div>
+                            <div class="col-3">
+                                <img src=/css/44s.png style="width: 50px">:<b th:text="${fFive.size()}"></b>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 text-center">
+                                <hr style="width: 85%;margin: 0 auto">
+                            </div>
+                        </div>
+                        <div class="row ps-5 pt-lg-5" style="margin-left: 2%">
+                            <div class="col-lg-6">
+                                <img src="/css/image%20140.png" style="width: 70%">
+                            </div>
+                            <div class="col-lg-6">
+                                <img src="/css/image%20141.png"  style="width: 70%">
+                            </div>
                         </div>
                     </div>
                 </div>

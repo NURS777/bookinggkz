@@ -28,11 +28,11 @@
                                 <div class="modal-body">
                                     <div class="mb-3 mx-auto ">
                                         <label class="form-label">Organization name</label>
-                                        <input required name="org_name" type="text" class="form-control" placeholder="Organization name">
+                                        <input required name="org_name" pattern="[a-zA-Z]*" aria-describedby="textHelp" type="text" class="form-control" placeholder="Organization name">
                                     </div>
                                     <div class="mb-3 mx-auto">
                                         <label class="form-label">Email address</label>
-                                        <input required name="org_email" type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                                        <input required name="org_email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
                                     </div>
                                     <div class="mb-3 mx-auto">
                                         <label class="form-label">Phone number</label>

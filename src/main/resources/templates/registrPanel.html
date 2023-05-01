@@ -30,7 +30,7 @@
         </div>
         <form  th:action="@{/signup}" method="post">
           <div class="mb-3 mx-auto inputs">
-            <input placeholder="Full Name" type="text" class="form-control" required name="user_name">
+            <input placeholder="Full Name" type="text" pattern="[a-zA-Z]*" aria-describedby="textHelp" class="form-control" required name="user_name">
           </div>
           <div class="mb-3 mx-auto inputs">
             <input  required name="user_birthday"
@@ -41,7 +41,7 @@
                     id="date" />
           </div>
           <div class="mb-3 mx-auto inputs">
-            <input required name="user_email" placeholder="Email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <input required name="user_email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="Email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
           </div>
           <div class="mb-3 mx-auto inputs">
             <input required name="user_phone" type="number" class="form-control" placeholder="Phone number">
@@ -50,8 +50,8 @@
             <input required name="user_password" type="Password" class="form-control" id="exampleInputPassword1" placeholder="Password">
           </div>
           <div class="mb-3 mx-auto">
-            <select required name="user_city" class="form-select mx-auto" aria-label="Default select example" style="width:80% ;">
-              <option th:each="city : ${cities}" th:text="${city.getName()}" th:value="${city.getId()}"></option>
+            <select required name="city_id" class="form-select mx-auto" aria-label="Default select example" style="width:80% ;">
+              <option th:each="city:${cities}" th:text="${city.name}" th:value="${city.getId()}"></option>
             </select>
           </div>
           <div class="mb-3 mx-auto">
@@ -60,11 +60,11 @@
             </select>
           </div>
           <div class="mx-auto form-check inputs">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <input type="checkbox" required class="form-check-input" id="exampleCheck1">
             <label class="form-check-label" for="exampleCheck1">asdasd</label>
           </div>
           <div class="mb-3 mx-auto form-check inputs">
-            <input type="checkbox" class="form-check-input" id="exampleCheck2">
+            <input type="checkbox" required class="form-check-input" id="exampleCheck2">
             <label class="form-check-label" for="exampleCheck2">asdasd</label>
           </div>
           <div class="col-md-12 text-center">
@@ -97,7 +97,7 @@
         </div>
       <form  th:action="@{/login}" method="post">
         <div class="mb-3 mx-auto inputs">
-          <input required name="user_logmail" placeholder="Email" type= "email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp">
+          <input required name="user_logmail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="Email" type= "email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp">
         </div>
         <div class="mb-2 mx-auto inputs">
           <input required name="user_logpassword" type="Password" class="form-control" placeholder="Password">

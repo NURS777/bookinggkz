@@ -8,12 +8,12 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -22,10 +22,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.PasswordAuthentication;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 public class MainController {
@@ -96,6 +95,11 @@ public class MainController {
         return "mainpage";
     }
 
+    @GetMapping("/404")
+    public String notFound() throws ConfigDataResourceNotFoundException {
+        return "404";
+    }
+
     private Users getUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if(!(authentication instanceof AnonymousAuthenticationToken)){
@@ -108,6 +112,7 @@ public class MainController {
     @PreAuthorize("isAuthenticated()")
     public String profile(Model model){
         model.addAttribute("CURRENT_USER",getUser());
+        Cities cities = getUser().getCity();
         return "profile";
     }
 
@@ -141,14 +146,40 @@ public class MainController {
                 model.addAttribute("bookList",books);
             }
         }
+        List<Feedbacks> feedbacks = databaseBean.getAllFeedbacks();
+        if(feedbacks!=null){
+            List<Feedbacks> feedbacks1 = new ArrayList<>();
+            List<Feedbacks> feedbacks2 = new ArrayList<>();
+            List<Feedbacks> feedbacks3 = new ArrayList<>();
+            List<Feedbacks> feedbacks4 = new ArrayList<>();
+            for(int i = 0;i<feedbacks.size();i++){
+                if(feedbacks.get(i).getFeedback().equals("two")){
+                    feedbacks1.add(feedbacks.get(i));
+                }else if(feedbacks.get(i).getFeedback().equals("three")){
+                    feedbacks2.add(feedbacks.get(i));
+                }else if(feedbacks.get(i).getFeedback().equals("four")){
+                    feedbacks3.add(feedbacks.get(i));
+                }else if(feedbacks.get(i).getFeedback().equals("five")){
+                    feedbacks4.add(feedbacks.get(i));
+                }
+            }
+            model.addAttribute("fTwo",feedbacks1);
+            model.addAttribute("fThree",feedbacks2);
+            model.addAttribute("fFour",feedbacks3);
+            model.addAttribute("fFive",feedbacks4);
+        }
         //System.out.println(topics);
         return "homepage";
     }
 
-    @GetMapping("/booking")
+    @GetMapping("/bookingByTopic/{userId}-page.html")
     @PreAuthorize("isAuthenticated()")
-    public String getBookPage(Model model){
-        model.addAttribute("CURRENT_USER",getUser());
+    public String getBookPage(Model model,@PathVariable(name = "userId") Long id){
+        if(Objects.equals(getUser().getId(), id)){
+            model.addAttribute("CURRENT_USER",getUser());
+        }else {
+            return "redirect:/bookingByTopic/"+getUser().getId() +"-page.html?booksuccess";
+        }
         List<ManageEvents> events = databaseBean.getAllEvents();
         model.addAttribute("events",events);
         List<Topics> topics = databaseBean.getAllTopics();
@@ -162,24 +193,7 @@ public class MainController {
                 return "redirect:/homepage";
             }
         }
-        return "booking";
-    }
-    @GetMapping("/bookbycity")
-    @PreAuthorize("isAuthenticated()")
-    public String getBookCityPage(Model model){
-        model.addAttribute("CURRENT_USER",getUser());
-        List<ManageEvents> events = databaseBean.getAllEvents();
-        model.addAttribute("events",events);
-        List<Topics> topics = databaseBean.getAllTopics();
-        model.addAttribute("topics",topics);
-        Roles roles = roleRepository.findByRole("ROLE_ADMIN");
-        Roles roles2 = roleRepository.findByRole("ROLE_MODERATOR");
-        if(getUser()!=null){
-            if(getUser().getRoles().contains(roles)||getUser().getRoles().contains(roles2)){
-                return "redirect:/homepage";
-            }
-        }
-        return "bookbycity";
+        return "bookingByTopic";
     }
 
     @GetMapping(value = "/viewTphoto/{url}",produces = {MediaType.IMAGE_JPEG_VALUE,MediaType.IMAGE_PNG_VALUE})
@@ -230,6 +244,8 @@ public class MainController {
         model.addAttribute("topic",topic);
         List<Topics> topics = databaseBean.getAllTopics();
         model.addAttribute("topics",topics);
+        List<Cities> cities = databaseBean.getAllCities();
+        model.addAttribute("cities",cities);
         Roles roles = roleRepository.findByRole("ROLE_ADMIN");
         Roles roles2 = roleRepository.findByRole("ROLE_MODERATOR");
         if(getUser()!=null){
@@ -238,5 +254,25 @@ public class MainController {
             }
         }
         return "booking";
+    }
+
+    @GetMapping("bookbycity/{cityId}-page.html")
+    @PreAuthorize("isAuthenticated()")
+    public String getBookCityPage(Model model,@PathVariable(name = "cityId") Long id){
+        model.addAttribute("CURRENT_USER",getUser());
+        List<ManageEvents> events = databaseBean.getAllEvents();
+        model.addAttribute("events",events);
+        List<Cities> cities = databaseBean.getAllCities();
+        model.addAttribute("cities",cities);
+        Cities city = databaseBean.getCity(id);
+        model.addAttribute("city",city);
+        Roles roles = roleRepository.findByRole("ROLE_ADMIN");
+        Roles roles2 = roleRepository.findByRole("ROLE_MODERATOR");
+        if(getUser()!=null){
+            if(getUser().getRoles().contains(roles)||getUser().getRoles().contains(roles2)){
+                return "redirect:/homepage";
+            }
+        }
+        return "bookByCity";
     }
 }

@@ -37,11 +37,7 @@ public class Users implements UserDetails {
 
     @Column(name = "password")
     private String password;
-
-    @Column(name = "city")
-    private String city;
-
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Topics topics;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -49,6 +45,9 @@ public class Users implements UserDetails {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Organizations organization;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Cities city;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

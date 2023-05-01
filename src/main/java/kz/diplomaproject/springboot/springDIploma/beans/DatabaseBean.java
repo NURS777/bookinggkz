@@ -90,4 +90,6 @@ public class DatabaseBean {
 
     public void addFeedback(Feedbacks feedbacks){feedbackRepository.save(feedbacks);}
 
+    public List<Feedbacks> getAllFeedbacks(){return feedbackRepository.findAll();}
+
 }

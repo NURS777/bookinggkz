@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+      layout:decorate="~{layout/main.html}">
+<div layout:fragment="siteContent" style="margin-bottom: 20%">
+    <div class="container-fluid-lg ps-5" style="color: #2c3034">
+        <div class="text-center titles">Events in <b th:text="${city.getName()}"></b></div>
+    </div>
+    <div class="container-fluid mt-3" style="padding-left: 7%">
+        <span style="font-family: 'Roboto';font-weight: 500;font-size: 22px;">You can find by yourself</span>
+        <div class="input-group rounded  mb-3" style="width: 30%">
+            <input type="search" class="form-control rounded" placeholder="Search" id="search-input" />
+            <span class="input-group-text border-0" id="search-addon">
+    <i class="fas fa-search"></i>
+  </span>
+        </div>
+    </div>
+    <div class="container-fluid" style="padding-left: 7%">
+        <div class="d-flex flex-wrap">
+            <a th:href="@{'/details/' + ${ev.getId()} + '-page.html'}" style="color:black;text-decoration: none" th:each="ev : ${events}">
+                <div class="card topp mt-4 me-5" style="width: 18rem;box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);border-radius: 10px" th:each="cit : ${ev.getCities()}" th:if="${cit.getId()==city.getId()}">
+                    <img th:src="@{'/viewphoto/'+${ev.getEventImg()}}" class="img" alt="..."style="border-top-left-radius:10px;border-top-right-radius:10px;height: 200px">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${ev.getName()}"></h5>
+                        <p class="card-text" th:text="${ev.getTitle()}"></p><br>
+                        <b th:text="${ev.getDate()}"></b>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+</html>

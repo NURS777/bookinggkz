@@ -47,5 +47,20 @@
 
 .statistica{
     height: 7rem;
+    padding: 2rem 0;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.statistica b{
+    font-family: 'Roboto';
+    font-weight:700;
+    font-size: 24px;
+    color: #000000;
+    text-align: center
+}
+.statistica span{
+    font-family: 'Roboto';
+    font-weight:500;
+    color: #6D6D6D;
+    text-align: center
 }

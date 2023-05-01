@@ -42,7 +42,7 @@
               <input required name="event_address" placeholder="Address" type="text" class="form-control">
             </div>
             <div class="col-lg-4">
-              <input required name="event_price" type="text" class="form-control" placeholder="Price">
+              <input required name="event_price" type="number" class="form-control" placeholder="Price">
             </div>
 
             <div class="col-lg-4">
@@ -55,10 +55,10 @@
           <div class="row mb-3">
             <div class="col-lg-4">
               <div class="mb-4">
-                <input required name="event_name" type="text" class="form-control" placeholder="Name">
+                <input required name="event_name" pattern="[a-zA-Z]*" aria-describedby="textHelp" type="text" class="form-control" placeholder="Name">
               </div>
               <div class="mb-3">
-                <input required name="event_title" type="text" class="form-control" placeholder="Title">
+                <input required name="event_title"  type="text" class="form-control" placeholder="Title">
               </div>
             </div>
             <div class="col-lg-8">

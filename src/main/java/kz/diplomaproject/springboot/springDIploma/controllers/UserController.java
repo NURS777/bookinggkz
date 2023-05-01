@@ -1,6 +1,7 @@
 package kz.diplomaproject.springboot.springDIploma.controllers;
 
 import kz.diplomaproject.springboot.springDIploma.beans.DatabaseBean;
+import kz.diplomaproject.springboot.springDIploma.entities.Cities;
 import kz.diplomaproject.springboot.springDIploma.entities.Organizations;
 import kz.diplomaproject.springboot.springDIploma.entities.Topics;
 import kz.diplomaproject.springboot.springDIploma.entities.Users;
@@ -53,12 +54,13 @@ public class UserController {
                              @RequestParam(name = "user_email") String email,
                              @RequestParam(name = "user_phone") String phone,
                              @RequestParam(name = "user_password") String password,
-                             @RequestParam(name = "user_city") String city,
+                             @RequestParam(name = "city_id") Long city_id,
                              @RequestParam(name = "user_category") Long topic_id){
         Topics topic = databaseBean.getTopic(topic_id);
         Users user = new Users();
         if(topic!=null){
             user.setFullname(name);user.setBirthdate(date);user.setEmail(email);
+            Cities city = databaseBean.getCity(city_id);
             user.setPhonenumber(phone);user.setCity(city);
             user.setTopics(topic);
             user.setPassword(passwordEncoder.encode(password));
