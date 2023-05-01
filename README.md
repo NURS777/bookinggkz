@@ -3,6 +3,7 @@
 #hosted in https://bookinggkz.herokuapp.com
 
 ! ADDING IMAGE TO TOPIC and EVENT does not work on heroku , but works locally cool! 
+! WebSite works COOL !
 ! You can test,if you want !
 ! just clone the repository !
 
