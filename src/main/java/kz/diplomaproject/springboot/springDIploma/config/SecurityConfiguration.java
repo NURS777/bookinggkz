@@ -13,6 +13,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+
+//configure web spring security by/from login inteface
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true,proxyTargetClass = true,securedEnabled = true)
@@ -26,6 +28,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userService);
     }
 
+    //default configuration
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
@@ -48,6 +51,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 logoutUrl("/tologout").
                 logoutSuccessUrl("/mainpage");
     }
+
+    //bean for use password encoder in future/for hashing passwords
     @Bean
     public BCryptPasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();

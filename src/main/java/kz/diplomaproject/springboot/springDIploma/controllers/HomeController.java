@@ -138,7 +138,7 @@ public class HomeController {
     @PreAuthorize("isAuthenticated()")
     public @ResponseBody byte[] viewEventPhoto(@PathVariable(name = "url") String url) throws IOException {
         String pictureUrl = viewPath+defaultPicture;
-        if(url!=null&&!url.equals("null")){
+        if(!url.equals("null")){
            pictureUrl = viewPath+url+".jpg";
         }
 

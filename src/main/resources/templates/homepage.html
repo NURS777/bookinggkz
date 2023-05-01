@@ -20,17 +20,21 @@
                                 <div class="text">
                                     Online Booking system for <br><b>Events in KZ</b>
                                 </div>
-                                <div class="text mt-5 welcome">
-                                    <div class="ms-5">
-                                        Welcome,
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 me-auto">
+                                    <div class="mt-5 me-5 welcome" style="padding-right: 8%">
+                                        <div class="text-center">
+                                            Welcome,
+                                        </div>
+                                        <h1 class="welcome text-center" th:text="${CURRENT_USER.getFullname()}"></h1>
                                     </div>
-                                    <h1 class="welcome" th:text="${CURRENT_USER.getFullname()}">!</h1>
                                 </div>
                             </div>
                         </div>
-                        <div class="row" style="padding-top: 100px;padding-right: 150px;">
+                        <div class="row" style="padding-top: 80px;padding-right: 140px;">
                             <div class="col-lg-6 mx-auto">
-                                <a th:href="@{'/bookingByTopic/' + ${CURRENT_USER.getId()} + '-page.html'}">
+                                <a th:href="@{'/bookingByTopic/'+ ${CURRENT_USER.getId()} + '-page.html'}">
                                     <button  type="submit" class="btn-info">
                                         Book Now!
                                     </button>

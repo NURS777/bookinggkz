@@ -22,9 +22,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.ArrayList;
 import java.util.List;
 
+
+//controller for booking system from default user side (client booking system)
 @Controller
 public class BookController {
 
+    //configuration database by name
     @Autowired
     @Qualifier("dbEventBean")
     private DatabaseBean databaseBean;
@@ -35,6 +38,7 @@ public class BookController {
     @Autowired
     private UserService userService;
 
+    //get current session(user)
     private Users getUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if(!(authentication instanceof AnonymousAuthenticationToken)){
@@ -42,6 +46,7 @@ public class BookController {
             return user;
         }return null;
     }
+
 
     @PostMapping("/bookevent")
     public String bookEvent(Model model,

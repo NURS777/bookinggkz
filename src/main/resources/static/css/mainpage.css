@@ -220,3 +220,10 @@ input::-webkit-inner-spin-button {
 		transform: translate(-37%,20%);
 	}
 }
+
+@media screen and (max-width: 600px){
+	.getBookk{
+		margin-bottom: 40%;
+	}
+}
+

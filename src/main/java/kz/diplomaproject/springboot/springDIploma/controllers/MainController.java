@@ -201,7 +201,7 @@ public class MainController {
     @PreAuthorize("isAuthenticated()")
     public @ResponseBody byte[] viewTopicPhoto(@PathVariable(name = "url") String url) throws IOException {
         String pictureUrl = viewPathT+defaultPictureT;
-        if(url!=null&&!url.equals("null")){
+        if(!url.equals("null")){
             pictureUrl = viewPathT+url+".jpg";
         }
 
