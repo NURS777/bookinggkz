@@ -21,6 +21,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+
+// controller for send one time password to email
 @Controller
 public class OtpController {
 
@@ -33,8 +35,10 @@ public class OtpController {
     private UserService userService;
 
 
+    //logger for showing opt in terminal
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    //get current session
     private Users getUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if(!(authentication instanceof AnonymousAuthenticationToken)){
@@ -43,6 +47,7 @@ public class OtpController {
         }return null;
     }
 
+    //method for generate otp
     @GetMapping("/generateOtp")
     public String generateOTP(Model model,
                               @RequestParam(name = "email") String email) throws MessagingException {
@@ -62,8 +67,10 @@ public class OtpController {
         return  "redirect:/mainpage?errorsendotp";
     }
 
+    //static usermail for future use as temporary cache
     protected static String usermail = "";
 
+    //checking otp
     @RequestMapping(value ="/validateOtp", method = RequestMethod.POST)
     public String validateOtp(@RequestParam("otpnum") int otpnum){
         //Validate the Otp

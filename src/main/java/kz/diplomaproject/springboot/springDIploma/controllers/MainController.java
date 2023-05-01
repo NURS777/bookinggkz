@@ -27,6 +27,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+
+//controller connected from the side of a regular user/ROLE_USER in the main pages
 @Controller
 public class MainController {
     @Autowired
@@ -60,6 +62,7 @@ public class MainController {
     @Value("${file.timages.defaultPicture}")
     private String defaultPictureT;
 
+    //get mainpage
     @GetMapping( value = "/mainpage")
     public String mainpage(Model model){
         model.addAttribute("CURRENT_USER",getUser());
@@ -70,6 +73,7 @@ public class MainController {
         Roles roles = roleRepository.findByRole("ROLE_ADMIN");
         Roles roles2 = roleRepository.findByRole("ROLE_MODERATOR");
         Roles roles3 = roleRepository.findByRole("ROLE_USER");
+        //check role
         if(getUser()!=null){
             if(getUser().getRoles().contains(roles)||getUser().getRoles().contains(roles2)||getUser().getRoles().contains(roles3)){
                 return "redirect:/homepage";
@@ -78,6 +82,7 @@ public class MainController {
         return "mainpage";
     }
 
+    //get default/first page as mainpage for anonymous user
     @GetMapping( value = "/")
     public String index(Model model){
         List<Topics> topics = databaseBean.getAllTopics();
@@ -88,6 +93,7 @@ public class MainController {
         Roles roles = roleRepository.findByRole("ROLE_ADMIN");
         Roles roles2 = roleRepository.findByRole("ROLE_MODERATOR");
         Roles roles3 = roleRepository.findByRole("ROLE_USER");
+        //check role of user
         if(getUser()!=null){
             if(getUser().getRoles().contains(roles)||getUser().getRoles().contains(roles2)||getUser().getRoles().contains(roles3)){
                 return "redirect:/homepage";
@@ -96,11 +102,13 @@ public class MainController {
         return "mainpage";
     }
 
+    //error handling 404.
     @GetMapping("/404")
     public String notFound() throws ConfigDataResourceNotFoundException {
         return "404";
     }
 
+    //get current user/session
     private Users getUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if(!(authentication instanceof AnonymousAuthenticationToken)){
@@ -109,6 +117,7 @@ public class MainController {
         }return null;
     }
 
+    //get profile page
     @GetMapping("/profile")
     @PreAuthorize("isAuthenticated()")
     public String profile(Model model){
@@ -117,6 +126,7 @@ public class MainController {
         return "profile";
     }
 
+    //get homepage
     @GetMapping("/homepage")
     @PreAuthorize("isAuthenticated()")
     public String getHomePAge(Model model){
@@ -132,6 +142,7 @@ public class MainController {
         List<Organizations> organizations = databaseBean.getAllOrganizations();
         model.addAttribute("orgs",organizations);
         model.addAttribute("CURRENT_USER",getUser());
+        //checking user is organizator or not for homepage of organizator.and add his books to model
         if(getUser().getOrganization()!=null){
             List<Booking> books = databaseBean.getAllBooks();
             List<Booking> booksOfOrg = new ArrayList<>();
@@ -147,6 +158,7 @@ public class MainController {
                 model.addAttribute("bookList",books);
             }
         }
+        //this is for analyzing in homepage admin dashboard page
         List<Feedbacks> feedbacks = databaseBean.getAllFeedbacks();
         if(feedbacks!=null){
             List<Feedbacks> feedbacks1 = new ArrayList<>();
@@ -173,9 +185,11 @@ public class MainController {
         return "homepage";
     }
 
+    //get bookbytopicofuser by user city id and topic id
     @GetMapping("/bookingByTopic/{userId}-page.html")
     @PreAuthorize("isAuthenticated()")
     public String getBookPage(Model model,@PathVariable(name = "userId") Long id){
+        //checking for current user id
         if(Objects.equals(getUser().getId(), id)){
             model.addAttribute("CURRENT_USER",getUser());
         }else {
@@ -189,6 +203,7 @@ public class MainController {
         model.addAttribute("cities",cities);
         Roles roles = roleRepository.findByRole("ROLE_ADMIN");
         Roles roles2 = roleRepository.findByRole("ROLE_MODERATOR");
+        //check role for which user is in
         if(getUser()!=null){
             if(getUser().getRoles().contains(roles)||getUser().getRoles().contains(roles2)){
                 return "redirect:/homepage";
@@ -197,6 +212,7 @@ public class MainController {
         return "bookingByTopic";
     }
 
+    //method for identifying an image under a fake address through the controller,topic image
     @GetMapping(value = "/viewTphoto/{url}",produces = {MediaType.IMAGE_JPEG_VALUE,MediaType.IMAGE_PNG_VALUE})
     @PreAuthorize("isAuthenticated()")
     public @ResponseBody byte[] viewTopicPhoto(@PathVariable(name = "url") String url) throws IOException {
@@ -218,6 +234,7 @@ public class MainController {
         return IOUtils.toByteArray(in);
     }
 
+    //get detailspage by event id
     @GetMapping( "details/{eventId}-page.html")
     @PreAuthorize("isAuthenticated()")
     public String details(@PathVariable(name = "eventId") Long id,Model model){
@@ -235,6 +252,7 @@ public class MainController {
     }
 
 
+    //get bookingpage by topic id
     @GetMapping( "booking/{topicId}-page.html")
     @PreAuthorize("isAuthenticated()")
     public String booking(@PathVariable(name = "topicId") Long id,Model model){
@@ -257,6 +275,7 @@ public class MainController {
         return "booking";
     }
 
+    //get bookbycitypage by city id
     @GetMapping("bookbycity/{cityId}-page.html")
     @PreAuthorize("isAuthenticated()")
     public String getBookCityPage(Model model,@PathVariable(name = "cityId") Long id){

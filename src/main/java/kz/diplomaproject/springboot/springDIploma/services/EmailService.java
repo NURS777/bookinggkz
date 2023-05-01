@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
+//service for sending emailtemplate with otp from gmail
 @Service
 public class EmailService {
 

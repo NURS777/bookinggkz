@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+//controller for the admin page, in some part for the organizer/moderator
 @Controller
 public class HomeController {
 
@@ -40,6 +41,8 @@ public class HomeController {
 
     @Autowired
     private UserService userService;
+
+    //(VALUES)sourses ,image paths
     @Value("${file.eimages.viewPath}")
     private String viewPath;
 
@@ -64,6 +67,8 @@ public class HomeController {
             return user;
         }return null;
     }
+
+    //get adminpage/anounsement managment
     @GetMapping( "/adminpage")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MODERATOR')")
     public String getAdminPage(Model model){
@@ -83,6 +88,7 @@ public class HomeController {
     }
 
 
+    //method for add event
     @PostMapping("/addevent")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MODERATOR')")
     public String toAddEvent(Model model,
@@ -102,13 +108,11 @@ public class HomeController {
         Cities city = databaseBean.getCity(city_id);
         List<ManageEvents> eventsList = databaseBean.getAllEvents();
 
-
         if(organization!=null&&city!=null){
             ManageEvents events = new ManageEvents();
             events.setName(name);events.setDescription(descr);events.setPrice(price);
             events.setDate(date);events.setOrganization(organization);events.setTitle(title);
             events.setAddress(address);events.setPartnumber(partnernum);events.setCities(city);
-
 
             if(file.getContentType().equals("image/jpeg")||file.getContentType().equals("image/png")||file.getContentType().equals("image/jpg")) {
 
@@ -134,6 +138,7 @@ public class HomeController {
         return "redirect:/adminpage?erroradd";
     }
 
+    //method for identifying an image under a fake address through the controller,for event image
     @GetMapping(value = "/viewphoto/{url}",produces = {MediaType.IMAGE_JPEG_VALUE,MediaType.IMAGE_PNG_VALUE})
     @PreAuthorize("isAuthenticated()")
     public @ResponseBody byte[] viewEventPhoto(@PathVariable(name = "url") String url) throws IOException {
@@ -155,6 +160,7 @@ public class HomeController {
         return IOUtils.toByteArray(in);
     }
 
+    //method to get list of events
     @GetMapping("/eventslist")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MODERATOR')")
     public String evenstList(Model model){
@@ -179,6 +185,7 @@ public class HomeController {
         return "eventslist";
     }
 
+    //method for get topicpage
     @GetMapping("/addtopicpage")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public String addTopicpage(Model model){
@@ -188,6 +195,7 @@ public class HomeController {
         return "addtopicpage";
     }
 
+    //method for post/add topic
     @PostMapping("/addtopic")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public String toAddEvent(Model model,
@@ -221,6 +229,7 @@ public class HomeController {
         return "redirect:/addtopicpage?erroradd";
     }
 
+    //method for get organizationspage
     @GetMapping("/organizationspage")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public String getOrgsPage(Model model){
@@ -232,6 +241,7 @@ public class HomeController {
         return "organizationspage";
     }
 
+    //method for get accountspage
     @GetMapping("/accounts")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public String accounts(Model model){

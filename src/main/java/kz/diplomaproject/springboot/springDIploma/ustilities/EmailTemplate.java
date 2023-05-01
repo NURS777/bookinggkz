@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Map;
 
+//class for showing template
 public class EmailTemplate {
 
     private String template;
@@ -14,6 +15,7 @@ public class EmailTemplate {
         try {
             this.template = loadTemplate(customtemplate);
         } catch (Exception e) {
+            //if doesnt show
             this.template = "Use this 4 digit code for login:";
         }
 
@@ -31,6 +33,8 @@ public class EmailTemplate {
         return content;
 
     }
+
+    //method for get template
     public String getTemplate(Map<String, String> replacements) {
 
         String cTemplate = this.template;

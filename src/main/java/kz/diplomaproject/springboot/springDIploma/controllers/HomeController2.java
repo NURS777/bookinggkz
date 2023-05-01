@@ -20,6 +20,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+//controller for organaizers to manage their orders
 @Controller
 public class HomeController2 {
 
@@ -33,6 +34,7 @@ public class HomeController2 {
     @Autowired
     private UserService userService;
 
+    //get current user/session
     private Users getUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if(!(authentication instanceof AnonymousAuthenticationToken)){
@@ -41,6 +43,7 @@ public class HomeController2 {
         }return null;
     }
 
+    //method for book user for event,after that user can not cancel his book in myorderspage
     @PostMapping("/bookuser")
     public String BookUser(@RequestParam(name = "id") Long id){
         Booking booking = databaseBean.getBook(id);
@@ -52,6 +55,7 @@ public class HomeController2 {
         return "redirect:/homepage?errorbook";
     }
 
+    //method for cancel user book for event,after that user can cancel again his book in myorderspage
     @PostMapping("/cancelbookuser")
     public String CancelBookUser(@RequestParam(name = "id") Long id){
         Booking booking = databaseBean.getBook(id);

@@ -47,7 +47,7 @@ public class BookController {
         }return null;
     }
 
-
+    //method for book event
     @PostMapping("/bookevent")
     public String bookEvent(Model model,
                             @RequestParam(name = "id") Long id,
@@ -68,6 +68,7 @@ public class BookController {
         return "redirect:/details/"+id+"-page.html??bookerror";
     }
 
+    //method for get user books
     @GetMapping("/myorders")
     @PreAuthorize("hasAnyRole('ROLE_USER')")
     public String myOrders(Model model){
@@ -83,6 +84,7 @@ public class BookController {
         return "myorders";
     }
 
+    //method for drop/delete/cancel user book
     @PostMapping("/deletebook")
     @PreAuthorize("hasAnyRole('ROLE_USER')")
     public String deleteBook(Model model,
@@ -94,6 +96,8 @@ public class BookController {
         return "redirect:/myorders";
     }
 
+
+    //method to leave a rating/feedback for the site,first emoji
     @PostMapping("/feedbackTwo")
     @PreAuthorize("hasAnyRole('ROLE_USER')")
     public String feedbackOne(Model model,
@@ -104,6 +108,7 @@ public class BookController {
             return "redirect:/myorders";
     }
 
+    //method to leave a rating/feedback for the site,second emoji
     @PostMapping("/feedbackThree")
     @PreAuthorize("hasAnyRole('ROLE_USER')")
     public String feedbackThree(Model model,
@@ -114,6 +119,7 @@ public class BookController {
         return "redirect:/myorders";
     }
 
+    //method to leave a rating/feedback for the site,third emoji
     @PostMapping("/feedbackFour")
     @PreAuthorize("hasAnyRole('ROLE_USER')")
     public String feedbackFour(Model model,
@@ -124,6 +130,7 @@ public class BookController {
         return "redirect:/myorders";
     }
 
+    //method to leave a rating/feedback for the site,forth emoji
     @PostMapping("/feedbackFive")
     @PreAuthorize("hasAnyRole('ROLE_USER')")
     public String feedbackFive(Model model,

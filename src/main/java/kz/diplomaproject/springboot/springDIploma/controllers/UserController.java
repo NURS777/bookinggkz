@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Date;
 
+
+//controller for manage user register.
 @Controller
 public class UserController {
 
@@ -39,6 +41,7 @@ public class UserController {
     @Autowired
     private DatabaseBean databaseBean;
 
+    //get current session
     private Users getUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if(!(authentication instanceof AnonymousAuthenticationToken)){
@@ -47,6 +50,7 @@ public class UserController {
         }return null;
     }
 
+    //method for sign up
     @PostMapping("/signup")
     public String toRegister(Model model,
                              @RequestParam(name = "user_name") String name,
@@ -75,6 +79,7 @@ public class UserController {
     }
 
 
+    //method to update from profile page
     @PostMapping("toupdatepassword")
     @PreAuthorize("isAuthenticated()")
     public String toUpdatePass(@RequestParam(name = "user_oldpass") String oldpass,
@@ -94,12 +99,15 @@ public class UserController {
         }
         return "redirect:/profile?passworderror";
     }
+
+    //error handling 403
     @GetMapping("/accessdeniedpage")
     public String accessDeniedPage(Model model){
         model.addAttribute("CURRENT_USER",getUser());
         return "403";
     }
 
+    //change password getting by one time password(FORGOT PASSWORD)
     @PostMapping("/changeOldUserPass")
     public String changePassOldUser(@RequestParam(name = "npass")String newPass,
                                     @RequestParam(name = "nrpass")String repeatPass){
@@ -114,6 +122,8 @@ public class UserController {
         }
     }
 
+
+    //map for add organization as a moderator
     @PostMapping("/addorgan")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public String toRegister(Model model,

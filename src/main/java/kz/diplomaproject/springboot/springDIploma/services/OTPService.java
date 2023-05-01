@@ -12,7 +12,11 @@ import java.util.concurrent.TimeUnit;
 
 @Service
 public class OTPService {
+
+    //time limit action of otp
     private static final Integer EXPIRE_MINS = 1;
+
+    //map with usermail
     private LoadingCache<String, Integer> otpCache;
     public OTPService(){
         super();
@@ -25,6 +29,7 @@ public class OTPService {
                 });
     }
 
+    //generetae otp
     public int generateOTP(String key){
         Random random = new Random();
         int otp = 1000 + random.nextInt(10000);
@@ -32,6 +37,8 @@ public class OTPService {
         return otp;
     }
 
+
+    //get otp value username
     public int getOtp(String key){
         try{
             return otpCache.get(key);
@@ -41,6 +48,7 @@ public class OTPService {
         }
     }
 
+    //get key with value int
     public String getOtpKey(Integer value){
         String key = "";
         try{
@@ -57,10 +65,12 @@ public class OTPService {
         }
     }
 
+    //return map otp by username(email)
     public LoadingCache<String, Integer> getOptCache(){
         return otpCache;
     }
 
+    //clear otp if key is not true
     public void clearOTP(String key){
         otpCache.invalidate(key);
     }
