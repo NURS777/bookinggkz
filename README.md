@@ -14,7 +14,7 @@ a "slug" which then gets run on their servers. Anything outside your slug
 
 #scenario:
  roles:admin,organizators,users;
-
+ 
 1.As an admin:
   *can see all informations about users,organizators,events
   *can to add organizators(edit,remove)
@@ -28,6 +28,8 @@ a "slug" which then gets run on their servers. Anything outside your slug
   
 3.As a user(client){
   *can see events by favourite topic
+  *can see events by city
+  *can see events by topic
   *can book event
   *can cancel event while organization not books
 }
