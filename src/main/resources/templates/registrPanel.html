@@ -28,7 +28,7 @@
             document.querySelector('.main').style.opacity = '60%';
           </script>
         </div>
-        <form  th:action="@{/signup}" method="post">
+        <form th:action="@{/signup}" method="post">
           <div class="mb-3 mx-auto inputs">
             <input placeholder="Full Name" type="text" pattern="[a-zA-Z]*" aria-describedby="textHelp" class="form-control" required name="user_name">
           </div>
@@ -95,7 +95,7 @@
             document.getElementById('goodchange').style.bottom = '1000px';
           </script>
         </div>
-      <form  th:action="@{/login}" method="post">
+      <form th:action="@{/login}" method="post">
         <div class="mb-3 mx-auto inputs">
           <input required name="user_logmail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="Email" type= "email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp">
         </div>
@@ -112,9 +112,9 @@
         </div>
       </form>
     </div>
-      
+
       <div id="forgot" style="position: absolute;">
-        <form th:action="@{/generateOtp}">
+        <form th:action="@{/generateOtp}" method="get">
           <div class="m-3 text-center" style="font-family: 'Inter';font-weight:500;color: #6D6D6D" >
             Please write your email !
           </div>

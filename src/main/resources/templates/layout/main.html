@@ -4,9 +4,9 @@
     <head th:insert="~{head.html}">
     </head>
     <body>
-        <div class="main">
+        <div>
             <div th:insert="~{navbar.html}"></div>
-            <div layout:fragment="siteContent">
+            <div id="swup" class="main transition-fade" layout:fragment="siteContent">
 
             </div>
             <div style="position:static">
@@ -18,5 +18,10 @@
                 </div>
             </div>
         </div>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+        <script src="/js/swup.min.js"></script>
+        <script type="text/javascript">
+            const swup = new Swup;
+        </script>
     </body>
 </html>
