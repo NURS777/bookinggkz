@@ -32,7 +32,7 @@ public class OTPService {
     //generetae otp
     public int generateOTP(String key){
         Random random = new Random();
-        int otp = 1000 + random.nextInt(10000);
+        int otp = 1111 + random.nextInt(9999);
         otpCache.put(key, otp);
         return otp;
     }
