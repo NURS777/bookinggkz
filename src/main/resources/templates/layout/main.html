@@ -14,12 +14,12 @@
                     <div th:insert="~{bottom.html}"></div>
                 </div>
                 <div sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_MODERATOR')">
-                    <div th:insert="~{bottomforadmin.html}"></div>
+                    <div th:insert="~{bottomforadmin.html}">
+
+                    </div>
                 </div>
             </div>
         </div>
-        <script src="/js/swup.min.js"></script>
-        <script src="/js/swup.js"></script>
         <script src="//unpkg.com/swup@3"></script>
         <script>
             const swup = new Swup;

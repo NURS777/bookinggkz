@@ -21,24 +21,26 @@
                             <img src="/css/image 3.png">
                         </a>
                     </li>
-                    <div class="dropdown">
-                        <button class="btn btn-secondary userS" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: black;">
-                            <img src="/css/image%2011.png" style="width: 60%;height: 60%">
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item"th:href="@{'/profile'}">Profile</a></li>
-                            <li><a class="dropdown-item"th:href="@{'/myorders'}" sec:authorize="hasAnyRole('ROLE_USER')">My orders</a></li>
-                            <li><a class="dropdown-item" href="JavaScript:void (0)" onclick="logout()">Logout</a></li>
-                        </ul>
-                        <script type="text/javascript">
-                            function logout(){
-                                document.getElementById("logoutFormId").submit();
-                            }
-                        </script>
-                        <form th:action="@{'/tologout'}" method="post" id="logoutFormId">
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <button class="btn btn-secondary userS" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: black;">
+                                <img src="/css/image%2011.png" style="width: 60%;height: 60%">
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item"th:href="@{'/profile'}">Profile</a></li>
+                                <li><a class="dropdown-item"th:href="@{'/myorders'}" sec:authorize="hasAnyRole('ROLE_USER')">My orders</a></li>
+                                <li><a class="dropdown-item" href="JavaScript:void (0)" onclick="logout()">Logout</a></li>
+                            </ul>
+                            <script type="text/javascript">
+                                function logout(){
+                                    document.getElementById("logoutFormId").submit();
+                                }
+                            </script>
+                            <form th:action="@{'/tologout'}" method="post" id="logoutFormId">
 
-                        </form>
-                    </div>
+                            </form>
+                        </div>
+                    </li>
                 </ul>
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0" sec:authorize="isAnonymous()">
                     <li class="nav-item">
@@ -47,7 +49,7 @@
                     <li class="nav-item">
                         <a class="nav-link sign_Up" href="#">Sign Up</a>
                     </li>
-                    <li class="nav-item dropdown">
+                    <li class="nav-item">
                         <div class="nav-link">
                             EN<img src="/css/image 3.png">
                         </div>

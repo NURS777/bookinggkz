@@ -28,7 +28,7 @@
             document.querySelector('.main').style.opacity = '60%';
           </script>
         </div>
-        <form th:action="@{/signup}" method="post">
+        <form action="#" th:action="@{/signup}" method="post">
           <div class="mb-3 mx-auto inputs">
             <input placeholder="Full Name" type="text" pattern="[a-zA-Z]*" aria-describedby="textHelp" class="form-control" required name="user_name">
           </div>
@@ -61,11 +61,13 @@
           </div>
           <div class="mx-auto form-check inputs">
             <input type="checkbox" required class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1">asdasd</label>
+            <label class="form-check-label" for="exampleCheck1">
+              Terms of use 1</label>
           </div>
           <div class="mb-3 mx-auto form-check inputs">
             <input type="checkbox" required class="form-check-input" id="exampleCheck2">
-            <label class="form-check-label" for="exampleCheck2">asdasd</label>
+            <label class="form-check-label" for="exampleCheck2">
+              Terms of use 2</label>
           </div>
           <div class="col-md-12 text-center">
             <button class="submitAcc">Create an account</button>
