@@ -18,14 +18,14 @@
                         <div class="row" style="margin-top:20%">
                             <div class="col-12 mx-auto">
                                 <div class="text">
-                                    Online Booking system for <br><b>Events in KZ</b>
+                                    [[#{content.label1}]] <br><b>[[#{content.label2}]]</b>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-12 me-auto">
                                     <div class="mt-5 me-5 welcome" style="padding-right: 8%">
-                                        <div class="text-center">
-                                            Welcome,
+                                        <div class="text-center welcome">
+                                            [[#{content.welcome}]],
                                         </div>
                                         <h1 class="welcome text-center" th:text="${CURRENT_USER.getFullname()}"></h1>
                                     </div>
@@ -36,7 +36,7 @@
                             <div class="col-lg-6 mx-auto">
                                 <a th:href="@{'/bookingByTopic/'+ ${CURRENT_USER.getId()} + '-page.html'}">
                                     <button  type="submit" class="btn-info">
-                                        Book Now!
+                                        [[#{content.booknow}]]
                                     </button>
                                 </a>
                             </div>

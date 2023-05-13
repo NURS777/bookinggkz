@@ -13,27 +13,27 @@
                       <b>Email: </b><span th:text="${CURRENT_USER.getEmail()}"></span>
                   </div>
                   <div class="mb-3 ms-lg-5">
-                      <b>Phone number: </b><span th:text="${CURRENT_USER.getPhonenumber()}"></span>
+                      <b>[[#{profile.phone}]] </b><span th:text="${CURRENT_USER.getPhonenumber()}"></span>
                   </div>
                   <div class="mb-3 ms-lg-5" sec:authorize="hasAnyRole('ROLE_USER')">
-                      <b>City: </b><span th:text="${CURRENT_USER.getCity().getName()}"></span>
+                      <b>[[#{profile.city}]] </b><span th:text="${CURRENT_USER.getCity().getName()}"></span>
                   </div>
                   <div class="mb-3 ms-lg-5" sec:authorize="hasAnyRole('ROLE_USER')">
-                      <b>Birthday: </b><span th:text="${CURRENT_USER.getBirthdate()}"></span>
+                      <b>[[#{profile.birthdate}]] </b><span th:text="${CURRENT_USER.getBirthdate()}"></span>
                   </div>
               </div>
           </div>
         <div class="col-8 mx-auto p-5" style="background-color: #ededed;">
             <div class="alert alert-success alert-dismissible fade show mx-auto" role="alert" th:if = "${param.passwordsuccess  !=null}">
-                Successfully password updated!
+                [[#{profile.successupd}]]
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             <div class="alert alert-danger alert-dismissible fade show mx-auto" role="alert" th:if = "${param.oldpasserror  !=null}">
-                Incorrect old password!
+                [[#{profile.incoorectold}]]
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             <div class="alert alert-danger alert-dismissible fade show mx-auto" role="alert" th:if = "${param.passworderror  !=null}">
-                New passwords are not same!
+                [[#{profile.incoorectnew}]]
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             <form  th:action="@{/toupdatepassword}" method="post">
@@ -47,7 +47,7 @@
                     <input required name="user_renewpass" type="Password" class="form-control" placeholder="RETYPE NEW PASSWORD">
                 </div>
                 <div class="col-md-12 text-center mx-auto" style="width: 50%;">
-                    <button class="submitAcc">UPDATE PASSWORD</button>
+                    <button class="submitAcc"> [[#{profile.updatepass}]]</button>
                 </div>
             </form>
         </div>

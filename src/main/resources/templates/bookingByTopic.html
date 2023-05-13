@@ -4,11 +4,11 @@
       layout:decorate="~{layout/main.html}">
 <div layout:fragment="siteContent" style="margin-bottom: 20%">
   <div class="container-fluid-lg ps-5" style="color: #2c3034">
-    <div class="text-center titles">Events in "<b th:text="${CURRENT_USER.getCity().getName()}"></b>" with your favourite topic "<b th:text="${CURRENT_USER.getTopics().getName()}"></b>" </div>
+    <div class="text-center titles">[[#{booking.eventsin}]] "<b th:text="${CURRENT_USER.getCity().getName()}"></b>" [[#{booking.favoutite}]] "<b th:text="${CURRENT_USER.getTopics().getName()}"></b>" </div>
 
   </div>
   <div class="container-fluid mt-3" style="padding-left: 7%">
-    <span style="font-family: 'Roboto';font-weight: 500;font-size: 22px;">You can find by yourself</span>
+    <span style="font-family: 'Roboto';font-weight: 500;font-size: 22px;">[[#{booking.findyourself}]]</span>
     <div class="input-group rounded  mb-3" style="width: 30%">
       <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
       <span class="input-group-text border-0" id="search-addon">

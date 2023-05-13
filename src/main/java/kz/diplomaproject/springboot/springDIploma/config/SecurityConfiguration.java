@@ -12,6 +12,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.csrf.CsrfFilter;
+import org.springframework.web.filter.CharacterEncodingFilter;
+import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
 
 //configure web spring security by/from login inteface
@@ -50,7 +53,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.logout().permitAll().
                 logoutUrl("/tologout").
                 logoutSuccessUrl("/mainpage");
+
+        CharacterEncodingFilter filter = new CharacterEncodingFilter();
+        filter.setEncoding("UTF-8");
+        filter.setForceEncoding(true);
+        http.addFilterBefore(filter, CsrfFilter.class);
+        http.csrf().disable();
     }
+
 
     //bean for use password encoder in future/for hashing passwords
     @Bean

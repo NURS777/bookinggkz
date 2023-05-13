@@ -17,8 +17,8 @@
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0" sec:authorize="isAuthenticated()">
                     <li class="nav-item">
                         <a class="nav-link" href="#">
-                            EN
-                            <img src="/css/image 3.png">
+                            <span th:text="#{menu.lang}"></span>
+                            <img th:src="#{path.source}" style="width: 22px">
                         </a>
                     </li>
                     <li class="nav-item">
@@ -27,9 +27,9 @@
                                 <img src="/css/image%2011.png" style="width: 60%;height: 60%">
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item"th:href="@{'/profile'}">Profile</a></li>
-                                <li><a class="dropdown-item"th:href="@{'/myorders'}" sec:authorize="hasAnyRole('ROLE_USER')">My orders</a></li>
-                                <li><a class="dropdown-item" href="JavaScript:void (0)" onclick="logout()">Logout</a></li>
+                                <li><a class="dropdown-item"th:href="@{'/profile'}">[[#{sidebar.profile}]]</a></li>
+                                <li><a class="dropdown-item"th:href="@{'/myorders'}" sec:authorize="hasAnyRole('ROLE_USER')">[[#{sidebar.myorders}]]</a></li>
+                                <li><a class="dropdown-item" href="JavaScript:void (0)" onclick="logout()">[[#{sidebar.logout}]]</a></li>
                             </ul>
                             <script type="text/javascript">
                                 function logout(){
@@ -44,15 +44,20 @@
                 </ul>
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0" sec:authorize="isAnonymous()">
                     <li class="nav-item">
-                        <a class="nav-link log_In" href="#">Log In</a>
+                        <a class="nav-link log_In" href="#">[[#{navbar.login}]]</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link sign_Up" href="#">Sign Up</a>
+                        <a class="nav-link sign_Up" href="#">[[#{navbar.signup}]]</a>
                     </li>
-                    <li class="nav-item">
-                        <div class="nav-link">
-                            EN<img src="/css/image 3.png">
-                        </div>
+                    <li class="nav-item dropdown">
+                            <a class="nav-link dropdown" href="#" role="button" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span th:text="#{menu.lang}"></span>
+                                <img th:src="#{path.source}" style="width: 22px">
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" th:href="@{'?lng=en'}">EN<img src="/css/image 3.png"></a></li>
+                                <li><a class="dropdown-item" th:href="@{'?lng=ru'}" >RU<img src="/css/rus.jpg" style="width: 22px;"></a></li>
+                            </ul>
                     </li>
                 </ul>
             </div>

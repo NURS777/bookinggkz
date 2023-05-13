@@ -1,19 +1,22 @@
 <div class="container registr" xmlns:th="http://www.thymeleaf.org">
   <div class="row">
     <div class="col-4 bg-light p-3 registration" style=" position: fixed  ;top:3%;left: 35%;right: 30%; border-radius: 15px;">
-      <div class="button-box">
-        <button type=  "button" class="toggle-btn" onclick="signUp()">
-          Sign Up
-        </button>
-        <button type="button" class="toggle-btn" onclick="logIn()">
-          Log In
-        </button>
+      <div class="button-box" >
+        <div style="display: flex;justify-content: space-around">
+          <button type="button" class="toggle-btn" onclick="signUp()" >
+            [[#{navbar.signup1}]]
+          </button>
+          <button type="button" class="toggle-btn" onclick="logIn()" >
+            [[#{navbar.login}]]
+          </button>
+        </div>
+
         <div id="btn"></div>
 
       </div>
       <div id="signup">
         <div class="alert alert-danger alert-dismissible fade show mx-auto" role="alert" style="width: 80%" th:if = "${param.emailerror!=null}">
-          User email already exists!
+          [[#{inmodal.emailexist}]]
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           <script type="text/javascript">
             document.querySelector('.container.registr').style.visibility='visible';
@@ -21,7 +24,7 @@
           </script>
         </div>
         <div class="alert alert-success alert-dismissible fade show mx-auto" role="alert" style="width: 80%" th:if = "${param.emailsuccess!=null}">
-          You're successfully registered!
+          [[#{inmodal.successregistered}]]
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           <script type="text/javascript">
             document.querySelector('.container.registr').style.visibility='visible';
@@ -62,21 +65,21 @@
           <div class="mx-auto form-check inputs">
             <input type="checkbox" required class="form-check-input" id="exampleCheck1">
             <label class="form-check-label" for="exampleCheck1">
-              Terms of use 1</label>
+              [[#{inmodal.terms1}]]</label>
           </div>
           <div class="mb-3 mx-auto form-check inputs">
             <input type="checkbox" required class="form-check-input" id="exampleCheck2">
             <label class="form-check-label" for="exampleCheck2">
-              Terms of use 2</label>
+              [[#{inmodal.terms2}]]</label>
           </div>
           <div class="col-md-12 text-center">
-            <button class="submitAcc">Create an account</button>
+            <button class="submitAcc">[[#{inmodal.crateAcc}]]</button>
           </div>
         </form>
       </div>
       <div id="login" style="position: absolute;">
         <div class="alert alert-danger alert-dismissible fade show mx-auto" role="alert" style="width: 80%" th:if = "${param.loginerror!=null}">
-          Incorrect email or password!
+          [[#{inmodal.incorrectpass}]]
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           <script type="text/javascript">
             document.querySelector('.container.registr').style.visibility='visible';
@@ -107,10 +110,10 @@
         <div class="mb-5 mx-auto inputs forgotP">
           <a href="#" class="forgot" style="font-family: 'Inter';font-style: normal;font-weight: 500;
                    font-size: 16px;line-height: 19px;text-decoration: none;color: #6D6D6D;"onmouseover="this.style.textDecorationLine='underline';this.style.color='#444444';"
-             onmouseout="this.style.textDecoration='none';this.style.color='#6D6D6D'">Forgot password</a>
+             onmouseout="this.style.textDecoration='none';this.style.color='#6D6D6D'">[[#{inmodal.forgot}]]</a>
         </div>
         <div class="col-md-12 text-center">
-          <button class="submitAcc">Log In</button>
+          <button class="submitAcc">[[#{navbar.login}]]</button>
         </div>
       </form>
     </div>
@@ -118,13 +121,13 @@
       <div id="forgot" style="position: absolute;">
         <form th:action="@{/generateOtp}" method="get">
           <div class="m-3 text-center" style="font-family: 'Inter';font-weight:500;color: #6D6D6D" >
-            Please write your email !
+            [[#{inmodal.writeemail}]]
           </div>
           <div class="mb-5 mx-auto inputs">
             <input type="email" class="form-control" required name="email" placeholder="email">
           </div>
           <div class="col-md-12 text-center">
-            <button class="submitAcc">Send</button>
+            <button class="submitAcc">[[#{inmodal.send}]]</button>
           </div>
         </form>
       </div>
@@ -132,13 +135,13 @@
       <div id="forgotOtp" style="position: absolute;">
         <form th:action="@{/validateOtp}" method="post">
           <div class="m-3 text-center" style="font-family: 'Inter';font-weight:500;color: #6D6D6D;text-align: center" >
-            We have sent you a 4-digit code by e-mail<br> Enter the code
+            [[#{inmodal.sentlabel1}]]<br> [[#{inmodal.sentlabel2}]]
           </div>
           <div class="mb-5 mx-auto inputs text-center">
             <input type="number" class="form-control" maxlength="4" required name="otpnum" style="width: 50%;margin: 0 auto" placeholder="insert code">
           </div>
           <div class="col-md-12 text-center">
-            <button class="submitAcc">Ready!</button>
+            <button class="submitAcc">[[#{inmodal.ready}]]</button>
           </div>
         </form>
       </div>
@@ -166,7 +169,7 @@
 
     <div id="changePass" style="position: absolute">
       <div class="alert alert-danger alert-dismissible fade show mx-auto" role="alert" style="width: 80%" th:if = "${param.passwordchangeerror!=null}">
-        Passwords are not same !
+        [[#{inmodal.passnotsame}]]
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         <script type="text/javascript">
           document.querySelector('.container.registr').style.visibility='visible';
@@ -189,7 +192,7 @@
       </div>
       <form th:action="@{/changeOldUserPass}" method="post">
         <div class="m-3 text-center" style="font-family: 'Inter';font-weight:500;color: #6D6D6D;text-align: center" >
-          Done!<br>Create a new password:
+          [[#{inmodal.done1}]]<br> [[#{inmodal.done2}]]
         </div>
         <div class="mb-5 mx-auto inputs text-center">
           <input type="password" class="form-control" required name="npass" placeholder="New password">
@@ -198,7 +201,7 @@
           <input type="password" class="form-control" required name="nrpass" placeholder="Repeate password">
         </div>
         <div class="col-md-12 text-center">
-          <button class="submitAcc">Ready!</button>
+          <button class="submitAcc"> [[#{inmodal.ready}]]</button>
         </div>
       </form>
     </div>
@@ -229,14 +232,14 @@
             <div class="row">
               <div class="col-lg-12  ps-4">
                 <div class="text-center" style="font-family: 'Inter';font-weight:500;color: #6D6D6D;text-align: center">
-                  Well done ! <br>Password changed successfully
+                  [[#{inmodal.welldone}]] <br>[[#{inmodal.welldone2}]]
                 </div>
                 <div class="p-5">
                   <img class="ms4-3" src="/css/image%2013.png" style="width: 40%">
                   <img class="ms-3" src="/css/image%2014.png" style="width: 40%">
                 </div>
                 <div class="col-md-12 mt-4 text-center">
-                  <button type="button" class="submitAcc continue">Continue</button>
+                  <button type="button" class="submitAcc continue">[[#{inmodal.continue}]]</button>
                 </div>
               </div>
             </div>
